@@ -198,7 +198,7 @@
 <body>
 
 <div class="container" id="app">
-    <h1>Samtal: Munnleg æfing (191 - 200)</h1>
+    <h1>Samtal: Munnleg æfing (151 - 160)</h1>
     <div class="subtitle">💻🎧 Lestu spurninguna og pældu í svörunum. 🗣️ Segðu svo <b>markorðið</b> í hljóðnemann.</div>
     
     <div class="progress-container">
@@ -206,7 +206,7 @@
     </div>
 
     <div class="lang-selector">
-        <label for="languageSelect"><b>🌍 Þýðing (Orð og spurning):</b></label>
+        <label for="languageSelect"><b>🌍 Þýðing (Orð, spurning & tillögur):</b></label>
         <select id="languageSelect" onchange="updateUI()">
             <option value="" selected disabled>Veldu tungumál...</option>
             <option value="ar">Arabíska – العربية</option>
@@ -254,7 +254,7 @@
     <div id="spoken"></div>
     <div id="result"></div>
 
-    <div id="media-box"><i>Veldu tungumál úr listanum að ofan til að sjá þýðingu á spurningunni.</i></div>
+    <div id="media-box"><i>Veldu tungumál úr listanum að ofan til að sjá þýðingu á spurningunni og svörunum.</i></div>
 
     <div class="nav-btns">
         <button class="btn" style="background-color: #5f6368;" onclick="prevExercise()">⬅️ Fyrri</button>
@@ -269,423 +269,203 @@
 <script>
 const exerciseData = [
     { 
-        text: "gert", 
+        text: "þessu", 
         html_content: `
-            <div class="question-text">❓ Hvað hefur þú <u><b>gert</b></u> skemmtilegt í dag?</div>
-            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <div class="question-text">❓ Hvernig finnst þér að búa á <u><b>þessu</b></u> landi?</div>
+            <div class="suggestion-title">💡 Tillaga að svari:</div>
             <ul class="suggestions">
-                <li>Ég hef farið í skólann og hitt vini mína.</li>
-                <li>Ég hef spilað fótbolta og slakað á.</li>
-                <li>Ég hef ekki gert mikið, bara horft á sjónvarpið.</li>
+                <li>Mér finnst mjög gott að búa á þessu landi. Það er öruggt og fallegt.</li>
             </ul>
         `,
         translations: {
-            "ar": "<div dir='rtl'><b>الكلمة:</b> gert (فعلت / قمت بـ)<br><b>السؤال:</b> ما الأشياء الممتعة التي <u><b>قمت بها</b></u> اليوم؟</div>",
-            "be": "<b>Woord:</b> gert (gedaan)<br><b>Vraag:</b> Wat voor leuke dingen heb je vandaag <u><b>gedaan</b></u>?",
-            "da": "<b>Ord:</b> gert (gjort / lavet)<br><b>Spørgsmål:</b> Hvad har du <u><b>lavet</b></u> af sjove ting i dag?",
-            "en": "<b>Word:</b> gert (done)<br><b>Question:</b> What fun things have you <u><b>done</b></u> today?",
-            "tl": "<b>Salita:</b> gert (ginawa)<br><b>Tanong:</b> Anong masasayang bagay ang <u><b>ginawa</b></u> mo ngayon?",
-            "fi": "<b>Sana:</b> gert (tehnyt)<br><b>Kysymys:</b> Mitä hauskaa olet <u><b>tehnyt</b></u> tänään?",
-            "fr": "<b>Mot:</b> gert (fait)<br><b>Question:</b> Quelles choses amusantes as-tu <u><b>faites</b></u> aujourd'hui ?",
-            "fo": "<b>Orð:</b> gert (gjørt)<br><b>Spurningur:</b> Hvat stuttligt hevur tú <u><b>gjørt</b></u> í dag?",
-            "kl": "<b>Oqaaseq:</b> gert (suliaraa / pivaa)<br><b>Apeqqut:</b> Ullumi suna nuannersoq <u><b>suliaraajuk</b></u>?",
-            "nl": "<b>Woord:</b> gert (gedaan)<br><b>Vraag:</b> Wat voor leuke dingen heb je vandaag <u><b>gedaan</b></u>?",
-            "it": "<b>Parola:</b> gert (fatto)<br><b>Domanda:</b> Quali cose divertenti hai <u><b>fatto</b></u> oggi?",
-            "ja": "<b>単語:</b> gert (した)<br><b>質問:</b> 今日はどんな楽しいことを<u><b>しました</b></u>か？",
-            "zh": "<b>单词:</b> gert (做过)<br><b>问题:</b> 你今天<u><b>做</b></u>了什么有趣的事？",
-            "ku": "<b>Peyv:</b> gert (kiriye)<br><b>Pirs:</b> Îro te çi tiştên xweş <u><b>kiriye</b></u>?",
-            "lv": "<b>Vārds:</b> gert (izdarījis)<br><b>Jautājums:</b> Kādas jautras lietas tu šodien esi <u><b>izdarījis</b></u>?",
-            "lt": "<b>Žodis:</b> gert (padarė)<br><b>Klausimas:</b> Kokių linksmų dalykų šiandien <u><b>padarei</b></u>?",
-            "no": "<b>Ord:</b> gert (gjort)<br><b>Spørsmål:</b> Hvilke morsomme ting har du <u><b>gjort</b></u> i dag?",
-            "fa": "<div dir='rtl'><b>کلمه:</b> gert (انجام داده)<br><b>سوال:</b> امروز چه کارهای جالبی <u><b>انجام داده‌ای</b></u>؟</div>",
-            "pt": "<b>Palavra:</b> gert (feito)<br><b>Pergunta:</b> Que coisas divertidas você tem <u><b>feito</b></u> hoje?",
-            "pl": "<b>Słowo:</b> gert (zrobił)<br><b>Pytanie:</b> Co fajnego dzisiaj <u><b>zrobiłeś/aś</b></u>?",
-            "ro": "<b>Cuvânt:</b> gert (făcut)<br><b>Întrebare:</b> Ce lucruri distractive ai <u><b>făcut</b></u> azi?",
-            "ru": "<b>Слово:</b> gert (сделал)<br><b>Вопрос:</b> Что веселого ты сегодня <u><b>сделал</b></u>?",
-            "es": "<b>Palabra:</b> gert (hecho)<br><b>Pregunta:</b> ¿Qué cosas divertidas has <u><b>hecho</b></u> hoy?",
-            "sv": "<b>Ord:</b> gert (gjort)<br><b>Fråga:</b> Vad har du <u><b>gjort</b></u> för roligt idag?",
-            "th": "<b>คำศัพท์:</b> gert (ทำ)<br><b>คำถาม:</b> วันนี้คุณได้<u><b>ทำ</b></u>อะไรสนุกๆ บ้าง?",
-            "de": "<b>Wort:</b> gert (gemacht)<br><b>Frage:</b> Was für lustige Dinge hast du heute <u><b>gemacht</b></u>?",
-            "uk": "<b>Слово:</b> gert (зробив)<br><b>Запитання:</b> Що веселого ти сьогодні <u><b>зробив</b></u>?",
-            "vi": "<b>Từ:</b> gert (đã làm)<br><b>Câu hỏi:</b> Hôm nay bạn đã <u><b>làm</b></u> những việc gì vui?"
+            "en": "<b>Word:</b> þessu (this)<br><b>Question:</b> How do you like living in <u><b>this</b></u> country?<br><br><b>Suggestion:</b><br>• I like living in this country very much. It is safe and beautiful.",
+            "pl": "<b>Słowo:</b> þessu (tym)<br><b>Pytanie:</b> Jak ci się podoba życie w <u><b>tym</b></u> kraju?<br><br><b>Sugestia:</b><br>• Bardzo lubię mieszkać w tym kraju. Jest bezpiecznie i pięknie.",
+            "da": "<b>Ord:</b> þessu (dette)<br><b>Spørgsmål:</b> Hvordan synes du, det er at bo i <u><b>dette</b></u> land?<br><br><b>Forslag:</b><br>• Jeg kan rigtig godt lide at bo i dette land. Det er trygt og smukt.",
+            "es": "<b>Palabra:</b> þessu (este)<br><b>Pregunta:</b> ¿Qué te parece vivir en <u><b>este</b></u> país?<br><br><b>Sugerencia:</b><br>• Me gusta mucho vivir en este país. Es seguro y hermoso.",
+            "uk": "<b>Слово:</b> þessu (цій)<br><b>Запитання:</b> Як тобі подобається жити в <u><b>цій</b></u> країні?<br><br><b>Пропозиція:</b><br>• Мені дуже подобається жити в цій країні. Тут безпечно і красиво.",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> þessu (هذا)<br><b>السؤال:</b> كيف تجد العيش في <u><b>هذا</b></u> البلد؟<br><br><b>اقتراح:</b><br>• يعجبني العيش في هذا البلد كثيراً. إنه آمن وجميل.</div>",
+            "tl": "<b>Salita:</b> þessu (ito)<br><b>Tanong:</b> Kumusta ang pamumuhay mo sa bansang <u><b>ito</b></u>?<br><br><b>Mungkahi:</b><br>• Gustong-gusto kong manirahan sa bansang ito. Ito ay ligtas at maganda.",
+            "vi": "<b>Từ:</b> þessu (này)<br><b>Câu hỏi:</b> Bạn cảm thấy thế nào khi sống ở đất nước <u><b>này</b></u>?<br><br><b>Gợi ý:</b><br>• Tôi rất thích sống ở đất nước này. Nơi đây an toàn và xinh đẹp."
         }
     },
     { 
-        text: "fyrst", 
+        text: "annars", 
         html_content: `
-            <div class="question-text">❓ Hvað gerir þú <u><b>fyrst</b></u> þegar þú vaknar á morgnana?</div>
-            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <div class="question-text">❓ Hvað segir þú <u><b>annars</b></u> gott í dag?</div>
+            <div class="suggestion-title">💡 Tillaga að svari:</div>
             <ul class="suggestions">
-                <li>Fyrst fer ég í sturtu og fæ mér morgunmat.</li>
-                <li>Ég skoða fyrst símann minn.</li>
-                <li>Ég bursta tennurnar fyrst.</li>
+                <li>Ég segi bara allt gott. Takk fyrir að spyrja. En þú? 🙂</li>
             </ul>
         `,
         translations: {
-            "ar": "<div dir='rtl'><b>الكلمة:</b> fyrst (أولاً)<br><b>السؤال:</b> ماذا تفعل <u><b>أولاً</b></u> عندما تستيقظ في الصباح؟</div>",
-            "be": "<b>Woord:</b> fyrst (eerst)<br><b>Vraag:</b> Wat doe je <u><b>eerst</b></u> als je 's ochtends wakker wordt?",
-            "da": "<b>Ord:</b> fyrst (først)<br><b>Spørgsmål:</b> Hvad gør du <u><b>først</b></u>, når du vågner om morgenen?",
-            "en": "<b>Word:</b> fyrst (first)<br><b>Question:</b> What do you do <u><b>first</b></u> when you wake up in the morning?",
-            "tl": "<b>Salita:</b> fyrst (una)<br><b>Tanong:</b> Ano ang <u><b>una</b></u> mong ginagawa paggising mo sa umaga?",
-            "fi": "<b>Sana:</b> fyrst (ensin)<br><b>Kysymys:</b> Mitä teet <u><b>ensimmäiseksi</b></u>, kun heräät aamulla?",
-            "fr": "<b>Mot:</b> fyrst (en premier)<br><b>Question:</b> Que fais-tu <u><b>en premier</b></u> quand tu te réveilles le matin ?",
-            "fo": "<b>Orð:</b> fyrst (fyrst)<br><b>Spurningur:</b> Hvat gert tú <u><b>fyrst</b></u>, tá ið tú vaknar á morgni?",
-            "kl": "<b>Oqaaseq:</b> fyrst (siullermik)<br><b>Apeqqut:</b> Ullaakkut iteruit suna <u><b>siullermik</b></u> suliarisarpiuk?",
-            "nl": "<b>Woord:</b> fyrst (eerst)<br><b>Vraag:</b> Wat doe je <u><b>eerst</b></u> als je 's ochtends wakker wordt?",
-            "it": "<b>Parola:</b> fyrst (per primo)<br><b>Domanda:</b> Cosa fai <u><b>per prima cosa</b></u> quando ti svegli la mattina?",
-            "ja": "<b>単語:</b> fyrst (最初に)<br><b>質問:</b> 朝起きたら、<u><b>最初</b></u>に何をしますか？",
-            "zh": "<b>单词:</b> fyrst (首先)<br><b>问题:</b> 早上醒来你<u><b>首先</b></u>做什么？",
-            "ku": "<b>Peyv:</b> fyrst (pêşî)<br><b>Pirs:</b> Serê sibê dema tu şiyar dibî tu <u><b>pêşî</b></u> çi dikî?",
-            "lv": "<b>Vārds:</b> fyrst (vispirms)<br><b>Jautājums:</b> Ko tu dari <u><b>vispirms</b></u>, kad no rīta pamosties?",
-            "lt": "<b>Žodis:</b> fyrst (pirmiausia)<br><b>Klausimas:</b> Ką darai <u><b>pirmiausia</b></u>, kai pabundi ryte?",
-            "no": "<b>Ord:</b> fyrst (først)<br><b>Spørsmål:</b> Hva gjør du <u><b>først</b></u> når du våkner om morgenen?",
-            "fa": "<div dir='rtl'><b>کلمه:</b> fyrst (اول)<br><b>سوال:</b> صبح که بیدار می‌شوی، <u><b>اول</b></u> چه کار می‌کنی؟</div>",
-            "pt": "<b>Palavra:</b> fyrst (primeiro)<br><b>Pergunta:</b> O que você faz <u><b>primeiro</b></u> quando acorda de manhã?",
-            "pl": "<b>Słowo:</b> fyrst (najpierw)<br><b>Pytanie:</b> Co robisz <u><b>najpierw</b></u>, kiedy budzisz się rano?",
-            "ro": "<b>Cuvânt:</b> fyrst (primul lucru)<br><b>Întrebare:</b> Ce faci <u><b>prima dată</b></u> când te trezești dimineața?",
-            "ru": "<b>Слово:</b> fyrst (сначала)<br><b>Вопрос:</b> Что ты делаешь <u><b>сначала</b></u>, когда просыпаешься утром?",
-            "es": "<b>Palabra:</b> fyrst (primero)<br><b>Pregunta:</b> ¿Qué es lo <u><b>primero</b></u> que haces cuando te despiertas por la mañana?",
-            "sv": "<b>Ord:</b> fyrst (först)<br><b>Fråga:</b> Vad gör du <u><b>först</b></u> när du vaknar på morgonen?",
-            "th": "<b>คำศัพท์:</b> fyrst (อย่างแรก)<br><b>คำถาม:</b> คุณทำอะไรเป็น<u><b>อย่างแรก</b></u>เมื่อตื่นนอนตอนเช้า?",
-            "de": "<b>Wort:</b> fyrst (zuerst)<br><b>Frage:</b> Was machst du <u><b>zuerst</b></u>, wenn du morgens aufwachst?",
-            "uk": "<b>Слово:</b> fyrst (спершу)<br><b>Запитання:</b> Що ти робиш <u><b>спершу</b></u>, коли прокидаєшся вранці?",
-            "vi": "<b>Từ:</b> fyrst (đầu tiên)<br><b>Câu hỏi:</b> Bạn làm gì <u><b>đầu tiên</b></u> khi thức dậy vào buổi sáng?"
+            "en": "<b>Word:</b> annars (otherwise/by the way)<br><b>Question:</b> How are you doing today, <u><b>by the way</b></u>?<br><br><b>Suggestion:</b><br>• I'm doing very well. Thanks for asking. And you? 🙂",
+            "pl": "<b>Słowo:</b> annars (poza tym / tak w ogóle)<br><b>Pytanie:</b> A <u><b>tak w ogóle</b></u>, jak się dzisiaj masz?<br><br><b>Sugestia:</b><br>• Wszystko u mnie dobrze. Dziękuję za pytanie. A u ciebie? 🙂",
+            "da": "<b>Ord:</b> annars (ellers)<br><b>Spørgsmål:</b> Hvordan går det <u><b>ellers</b></u> med dig i dag?<br><br><b>Forslag:</b><br>• Det går bare godt. Tak fordi du spørger. Og dig? 🙂",
+            "es": "<b>Palabra:</b> annars (por lo demás / a propósito)<br><b>Pregunta:</b> <u><b>Por cierto</b></u>, ¿cómo estás hoy?<br><br><b>Sugerencia:</b><br>• Estoy muy bien. Gracias por preguntar. ¿Y tú? 🙂",
+            "uk": "<b>Слово:</b> annars (до речі/в іншому)<br><b>Запитання:</b> <u><b>До речі</b></u>, як твої справи сьогодні?<br><br><b>Пропозиція:</b><br>• У мене все дуже добре. Дякую, що запитали. А у вас? 🙂",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> annars (بالمناسبة)<br><b>السؤال:</b> <u><b>بالمناسبة</b></u>، كيف حالك اليوم؟<br><br><b>اقتراح:</b><br>• أنا بخير. شكرا على السؤال. وأنت؟ 🙂</div>",
+            "tl": "<b>Salita:</b> annars (nga pala)<br><b>Tanong:</b> <u><b>Nga pala</b></u>, kumusta ka ngayon?<br><br><b>Mungkahi:</b><br>• Mabuti naman ako. Salamat sa pagtatanong. Ikaw? 🙂",
+            "vi": "<b>Từ:</b> annars (nhân tiện)<br><b>Câu hỏi:</b> <u><b>Nhân tiện</b></u>, hôm nay bạn thế nào?<br><br><b>Gợi ý:</b><br>• Tôi rất khỏe. Cảm ơn bạn đã hỏi. Còn bạn thì sao? 🙂"
         }
     },
     { 
-        text: "landi", 
+        text: "hátt", 
         html_content: `
-            <div class="question-text">❓ Hefur þú ferðast mikið úti á <u><b>landi</b></u> á Íslandi?</div>
-            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <div class="question-text">❓ Talar þú stundum <u><b>hátt</b></u>?</div>
+            <div class="suggestion-title">💡 Tillaga að svari:</div>
             <ul class="suggestions">
-                <li>Já, ég hef farið til Akureyrar og skoðað Gullfoss.</li>
-                <li>Nei, ég hef mest verið hérna í Reykjavík.</li>
-                <li>Já, ég fór í sveitina um helgina.</li>
+                <li>Já, ég tala stundum hátt þegar ég þarf þess.</li>
             </ul>
         `,
         translations: {
-            "ar": "<div dir='rtl'><b>الكلمة:</b> landi (الريف / البلاد)<br><b>السؤال:</b> هل سافرت كثيراً في <u><b>الريف</b></u> في آيسلندا؟</div>",
-            "be": "<b>Woord:</b> landi (platteland)<br><b>Vraag:</b> Heb je veel gereisd op het <u><b>platteland</b></u> van IJsland?",
-            "da": "<b>Ord:</b> landi (landet / landdistrikt)<br><b>Spørgsmål:</b> Har du rejst meget ude på <u><b>landet</b></u> i Island?",
-            "en": "<b>Word:</b> landi (countryside)<br><b>Question:</b> Have you traveled much in the <u><b>countryside</b></u> in Iceland?",
-            "tl": "<b>Salita:</b> landi (probinsya / labas ng lungsod)<br><b>Tanong:</b> Nakapaglakbay ka na ba nang madalas sa <u><b>probinsya</b></u> ng Iceland?",
-            "fi": "<b>Sana:</b> landi (maaseutu)<br><b>Kysymys:</b> Oletko matkustanut paljon <u><b>maaseudulla</b></u> Islannissa?",
-            "fr": "<b>Mot:</b> landi (campagne)<br><b>Question:</b> As-tu beaucoup voyagé à la <u><b>campagne</b></u> en Islande ?",
-            "fo": "<b>Orð:</b> landi (landinum)<br><b>Spurningur:</b> Hevur tú ferðast nógv úti á <u><b>landinum</b></u> í Íslandi?",
-            "kl": "<b>Oqaaseq:</b> landi (nuna / illoqarfimmit ungasissumi)<br><b>Apeqqut:</b> Islandimi <u><b>nunaannarmi</b></u> (illoqarfimmit ungasissumi) angalasimavit?",
-            "nl": "<b>Woord:</b> landi (platteland)<br><b>Vraag:</b> Heb je veel rondgereisd op het <u><b>platteland</b></u> in IJsland?",
-            "it": "<b>Parola:</b> landi (campagna)<br><b>Domanda:</b> Hai viaggiato molto in <u><b>campagna</b></u> in Islanda?",
-            "ja": "<b>単語:</b> landi (田舎 / 地方)<br><b>質問:</b> アイスランドの<u><b>地方（田舎）</b></u>をたくさん旅行しましたか？",
-            "zh": "<b>单词:</b> landi (乡下 / 外地)<br><b>问题:</b> 你在冰岛的<u><b>外地（乡下）</b></u>旅行得多吗？",
-            "ku": "<b>Peyv:</b> landi (gundewar / derveyî bajêr)<br><b>Pirs:</b> Te qet li <u><b>gundewarên</b></u> Îzlandayê gelek geriyaye?",
-            "lv": "<b>Vārds:</b> landi (lauki)<br><b>Jautājums:</b> Vai tu esi daudz ceļojis pa <u><b>laukiem</b></u> Islandē?",
-            "lt": "<b>Žodis:</b> landi (užmiestis / kaimas)<br><b>Klausimas:</b> Ar daug keliavai <u><b>užmiestyje</b></u> Islandijoje?",
-            "no": "<b>Ord:</b> landi (landet / distriktet)<br><b>Spørsmål:</b> Har du reist mye ute på <u><b>landet</b></u> i Island?",
-            "fa": "<div dir='rtl'><b>کلمه:</b> landi (حومه / خارج از شهر)<br><b>سوال:</b> آیا در <u><b>خارج از شهر (حومه)</b></u> ایسلند زیاد سفر کرده‌ای؟</div>",
-            "pt": "<b>Palavra:</b> landi (interior / campo)<br><b>Pergunta:</b> Você já viajou muito pelo <u><b>interior</b></u> da Islândia?",
-            "pl": "<b>Słowo:</b> landi (prowincja / poza miastem)<br><b>Pytanie:</b> Czy dużo podróżowałeś/aś po <u><b>prowincji (poza miastem)</b></u> na Islandii?",
-            "ro": "<b>Cuvânt:</b> landi (zonă rurală / țară)<br><b>Întrebare:</b> Ai călătorit mult în <u><b>zona rurală</b></u> din Islanda?",
-            "ru": "<b>Слово:</b> landi (сельская местность / за городом)<br><b>Вопрос:</b> Ты много путешествовал по <u><b>сельской местности (за городом)</b></u> в Исландии?",
-            "es": "<b>Palabra:</b> landi (campo / afueras)<br><b>Pregunta:</b> ¿Has viajado mucho por el <u><b>campo (afueras)</b></u> en Islandia?",
-            "sv": "<b>Ord:</b> landi (landsbygden)<br><b>Fråga:</b> Har du rest mycket på <u><b>landsbygden</b></u> i Island?",
-            "th": "<b>คำศัพท์:</b> landi (ชนบท / ต่างจังหวัด)<br><b>คำถาม:</b> คุณได้เดินทางไปตาม<u><b>ต่างจังหวัด</b></u>ในไอซ์แลนด์บ่อยไหม?",
-            "de": "<b>Wort:</b> landi (Land / außerhalb der Stadt)<br><b>Frage:</b> Bist du viel auf dem <u><b>Land</b></u> in Island gereist?",
-            "uk": "<b>Слово:</b> landi (сільська місцевість / за містом)<br><b>Запитання:</b> Ти багато подорожував <u><b>за містом (у провінції)</b></u> в Ісландії?",
-            "vi": "<b>Từ:</b> landi (nông thôn / ngoại ô)<br><b>Câu hỏi:</b> Bạn có đi du lịch nhiều ở <u><b>nông thôn</b></u> tại Iceland không?"
+            "en": "<b>Word:</b> hátt (loud / highly)<br><b>Question:</b> Do you sometimes speak <u><b>loudly</b></u>?<br><br><b>Suggestion:</b><br>• Yes, I sometimes speak loudly when I need to.",
+            "pl": "<b>Słowo:</b> hátt (głośno)<br><b>Pytanie:</b> Czy czasami mówisz <u><b>głośno</b></u>?<br><br><b>Sugestia:</b><br>• Tak, czasami mówię głośno, kiedy muszę.",
+            "da": "<b>Ord:</b> hátt (højt)<br><b>Spørgsmål:</b> Taler du nogle gange <u><b>højt</b></u>?<br><br><b>Forslag:</b><br>• Ja, jeg taler nogle gange højt, når det er nødvendigt.",
+            "es": "<b>Palabra:</b> hátt (alto / fuerte)<br><b>Pregunta:</b> ¿A veces hablas en voz <u><b>alta</b></u>?<br><br><b>Sugerencia:</b><br>• Sí, a veces hablo en voz alta cuando lo necesito.",
+            "uk": "<b>Слово:</b> hátt (голосно)<br><b>Запитання:</b> Ти іноді говориш <u><b>голосно</b></u>?<br><br><b>Пропозиція:</b><br>• Так, іноді я говорю голосно, коли це потрібно.",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> hátt (بصوت عالٍ)<br><b>السؤال:</b> هل تتحدث <u><b>بصوت عالٍ</b></u> أحياناً؟<br><br><b>اقتراح:</b><br>• نعم، أتحدث أحياناً بصوت عالٍ عندما أحتاج إلى ذلك.</div>",
+            "tl": "<b>Salita:</b> hátt (malakas)<br><b>Tanong:</b> Nagsasalita ka ba minsan nang <u><b>malakas</b></u>?<br><br><b>Mungkahi:</b><br>• Oo, minsan nagsasalita ako nang malakas kapag kailangan.",
+            "vi": "<b>Từ:</b> hátt (to / lớn tiếng)<br><b>Câu hỏi:</b> Thỉnh thoảng bạn có nói <u><b>to</b></u> không?<br><br><b>Gợi ý:</b><br>• Có, đôi khi tôi nói to khi cần thiết."
         }
     },
     { 
-        text: "hluta", 
+        text: "vegar", 
         html_content: `
-            <div class="question-text">❓ Skilur þú stundum bara <u><b>hluta</b></u> af því sem kennarinn segir?</div>
-            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <div class="question-text">❓ Það er margt gott í skólanum okkar. Hvað finnst þér hins <u><b>vegar</b></u> vanta?</div>
+            <div class="suggestion-title">💡 Tillaga að svari:</div>
             <ul class="suggestions">
-                <li>Já, stundum skil ég bara hluta ef hann talar mjög hratt.</li>
-                <li>Nei, ég skil venjulega allt sem hann segir.</li>
-                <li>Já, ég skil oftast bara fyrri hlutann af setningunni.</li>
+                <li>Mér finnst vanta ……</li>
             </ul>
         `,
         translations: {
-            "ar": "<div dir='rtl'><b>الكلمة:</b> hluta (جزء)<br><b>السؤال:</b> هل تفهم أحياناً <u><b>جزءاً</b></u> فقط مما يقوله المعلم؟</div>",
-            "be": "<b>Woord:</b> hluta (een deel)<br><b>Vraag:</b> Begrijp je soms maar <u><b>een deel</b></u> van wat de leraar zegt?",
-            "da": "<b>Ord:</b> hluta (en del)<br><b>Spørgsmål:</b> Forstår du nogle gange kun <u><b>en del</b></u> af det, læreren siger?",
-            "en": "<b>Word:</b> hluta (a part)<br><b>Question:</b> Do you sometimes only understand <u><b>a part</b></u> of what the teacher says?",
-            "tl": "<b>Salita:</b> hluta (isang bahagi)<br><b>Tanong:</b> Naiintindihan mo ba minsan ang <u><b>isang bahagi</b></u> lang ng sinasabi ng guro?",
-            "fi": "<b>Sana:</b> hluta (osan)<br><b>Kysymys:</b> Ymmärrätkö joskus vain <u><b>osan</b></u> siitä, mitä opettaja sanoo?",
-            "fr": "<b>Mot:</b> hluta (une partie)<br><b>Question:</b> Ne comprends-tu parfois qu'<u><b>une partie</b></u> de ce que dit le professeur ?",
-            "fo": "<b>Orð:</b> hluta (ein part)<br><b>Spurningur:</b> Skilt tú onkuntíð bara <u><b>ein part</b></u> av tí, sum lærarin sigur?",
-            "kl": "<b>Oqaaseq:</b> hluta (ilaa)<br><b>Apeqqut:</b> Ilaanni ilinniartitsisup oqaasiisa <u><b>ilaat</b></u> taamaallaat paasisarpigit?",
-            "nl": "<b>Woord:</b> hluta (een deel)<br><b>Vraag:</b> Begrijp je soms maar <u><b>een deel</b></u> van wat de leraar zegt?",
-            "it": "<b>Parola:</b> hluta (una parte)<br><b>Domanda:</b> A volte capisci solo <u><b>una parte</b></u> di quello che dice l'insegnante?",
-            "ja": "<b>単語:</b> hluta (一部)<br><b>質問:</b> 先生が言うことの<u><b>一部</b></u>しか理解できないことが時々ありますか？",
-            "zh": "<b>单词:</b> hluta (一部分)<br><b>问题:</b> 你有时是否只明白老师说的<u><b>一部分</b></u>？",
-            "ku": "<b>Peyv:</b> hluta (beşek)<br><b>Pirs:</b> Ma tu carinan tenê <u><b>beşek</b></u> ji tiştên ku mamoste dibêje fêm dikî?",
-            "lv": "<b>Vārds:</b> hluta (daļu)<br><b>Jautājums:</b> Vai tu dažreiz saproti tikai <u><b>daļu</b></u> no tā, ko saka skolotājs?",
-            "lt": "<b>Žodis:</b> hluta (dalį)<br><b>Klausimas:</b> Ar kartais supranti tik <u><b>dalį</b></u> to, ką sako mokytojas?",
-            "no": "<b>Ord:</b> hluta (en del)<br><b>Spørsmål:</b> Forstår du noen ganger bare <u><b>en del</b></u> av det læreren sier?",
-            "fa": "<div dir='rtl'><b>کلمه:</b> hluta (بخشی)<br><b>سوال:</b> آیا گاهی اوقات فقط <u><b>بخشی</b></u> از آنچه معلم می‌گوید را می‌فهمی؟</div>",
-            "pt": "<b>Palavra:</b> hluta (uma parte)<br><b>Pergunta:</b> Você às vezes entende apenas <u><b>uma parte</b></u> do que o professor diz?",
-            "pl": "<b>Słowo:</b> hluta (część)<br><b>Pytanie:</b> Czy czasami rozumiesz tylko <u><b>część</b></u> tego, co mówi nauczyciel?",
-            "ro": "<b>Cuvânt:</b> hluta (o parte)<br><b>Întrebare:</b> Uneori înțelegi doar <u><b>o parte</b></u> din ceea ce spune profesorul?",
-            "ru": "<b>Слово:</b> hluta (часть)<br><b>Вопрос:</b> Ты иногда понимаешь только <u><b>часть</b></u> того, что говорит учитель?",
-            "es": "<b>Palabra:</b> hluta (una parte)<br><b>Pregunta:</b> ¿A veces solo entiendes <u><b>una parte</b></u> de lo que dice el profesor?",
-            "sv": "<b>Ord:</b> hluta (en del)<br><b>Fråga:</b> Förstår du ibland bara <u><b>en del</b></u> av vad läraren säger?",
-            "th": "<b>คำศัพท์:</b> hluta (บางส่วน)<br><b>คำถาม:</b> บางครั้งคุณเข้าใจแค่<u><b>บางส่วน</b></u>ของสิ่งที่ครูพูดใช่ไหม?",
-            "de": "<b>Wort:</b> hluta (einen Teil)<br><b>Frage:</b> Verstehst du manchmal nur <u><b>einen Teil</b></u> von dem, was der Lehrer sagt?",
-            "uk": "<b>Слово:</b> hluta (частину)<br><b>Запитання:</b> Ти іноді розумієш лише <u><b>частину</b></u> того, що говорить вчитель?",
-            "vi": "<b>Từ:</b> hluta (một phần)<br><b>Câu hỏi:</b> Có khi nào bạn chỉ hiểu <u><b>một phần</b></u> những gì giáo viên nói không?"
+            "en": "<b>Word:</b> vegar (used in 'hins vegar' = however)<br><b>Question:</b> There are many good things in our school. What do you think is missing, <u><b>however</b></u>?<br><br><b>Suggestion:</b><br>• I think we are missing ……",
+            "pl": "<b>Słowo:</b> vegar (używane w 'hins vegar' = jednakże)<br><b>Pytanie:</b> W naszej szkole jest wiele dobrych rzeczy. Czego <u><b>jednak</b></u> uważasz, że brakuje?<br><br><b>Sugestia:</b><br>• Myślę, że brakuje ……",
+            "da": "<b>Ord:</b> vegar (brugt i 'hins vegar' = imidlertid)<br><b>Spørgsmål:</b> Der er mange gode ting på vores skole. Hvad synes du <u><b>imidlertid</b></u> der mangler?<br><br><b>Forslag:</b><br>• Jeg synes der mangler ……",
+            "es": "<b>Palabra:</b> vegar (usado en 'hins vegar' = sin embargo)<br><b>Pregunta:</b> Hay muchas cosas buenas en nuestra escuela. <u><b>Sin embargo</b></u>, ¿qué crees que falta?<br><br><b>Sugerencia:</b><br>• Creo que falta ……",
+            "uk": "<b>Слово:</b> vegar (використовується в 'hins vegar' = однак)<br><b>Запитання:</b> У нашій школі багато хорошого. <u><b>Однак</b></u> чого, на твою думку, бракує?<br><br><b>Пропозиція:</b><br>• Мені здається, що бракує ……",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> vegar (تستخدم في 'hins vegar' بمعنى ومع ذلك)<br><b>السؤال:</b> هناك أشياء كثيرة جيدة في مدرستنا. <u><b>ومع ذلك</b></u>، ما الذي تعتقد أنه مفقود؟<br><br><b>اقتراح:</b><br>• أعتقد أنه ينقصنا ……</div>",
+            "tl": "<b>Salita:</b> vegar (ginagamit sa 'hins vegar' = gayunpaman)<br><b>Tanong:</b> Maraming magagandang bagay sa ating paaralan. <u><b>Gayunpaman</b></u>, ano sa tingin mo ang kulang?<br><br><b>Mungkahi:</b><br>• Sa tingin ko ay kulang ang ……",
+            "vi": "<b>Từ:</b> vegar (được dùng trong 'hins vegar' = tuy nhiên)<br><b>Câu hỏi:</b> Có nhiều điều tốt ở trường chúng ta. <u><b>Tuy nhiên</b></u>, bạn nghĩ còn thiếu điều gì?<br><br><b>Gợi ý:</b><br>• Tôi nghĩ chúng ta còn thiếu ……"
         }
     },
     { 
-        text: "urðu", 
+        text: "finnst", 
         html_content: `
-            <div class="question-text">❓ Hvers vegna <u><b>urðu</b></u> krakkarnir svona glaðir í gær?</div>
-            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <div class="question-text">❓ Hvað <u><b>finnst</b></u> þér skemmtilegast að gera eftir skóla?</div>
+            <div class="suggestion-title">💡 Tillaga að svari:</div>
             <ul class="suggestions">
-                <li>Þau urðu glöð af því að við fengum snemmbúið frí.</li>
-                <li>Þau urðu glöð út af góða veðrinu.</li>
-                <li>Af því að við fengum pizzu í matinn!</li>
+                <li>Mér finnst skemmtilegast að fara á æfingu, hitta vini og borða góðan mat.</li>
             </ul>
         `,
         translations: {
-            "ar": "<div dir='rtl'><b>الكلمة:</b> urðu (أصبحوا)<br><b>السؤال:</b> لماذا <u><b>أصبح</b></u> الأطفال سعداء جداً بالأمس؟</div>",
-            "be": "<b>Woord:</b> urðu (werden)<br><b>Vraag:</b> Waarom <u><b>werden</b></u> de kinderen gisteren zo blij?",
-            "da": "<b>Ord:</b> urðu (blev)<br><b>Spørgsmål:</b> Hvorfor <u><b>blev</b></u> børnene så glade i går?",
-            "en": "<b>Word:</b> urðu (became)<br><b>Question:</b> Why did the kids <u><b>become</b></u> so happy yesterday?",
-            "tl": "<b>Salita:</b> urðu (naging)<br><b>Tanong:</b> Bakit <u><b>naging</b></u> napakasaya ng mga bata kahapon?",
-            "fi": "<b>Sana:</b> urðu (tulivat / muuttuivat)<br><b>Kysymys:</b> Miksi lapset <u><b>tulivat</b></u> niin iloisiksi eilen?",
-            "fr": "<b>Mot:</b> urðu (sont devenus)<br><b>Question:</b> Pourquoi les enfants <u><b>sont-ils devenus</b></u> si heureux hier ?",
-            "fo": "<b>Orð:</b> urðu (vórðu)<br><b>Spurningur:</b> Hví <u><b>vórðu</b></u> børnini so gløð í gjár?",
-            "kl": "<b>Oqaaseq:</b> urðu (nngorput)<br><b>Apeqqut:</b> Sooq meeqqat ippassaq taama nuannaartigilersimappat (<u><b>urðu</b></u>)?",
-            "nl": "<b>Woord:</b> urðu (werden)<br><b>Vraag:</b> Waarom <u><b>werden</b></u> de kinderen gisteren zo blij?",
-            "it": "<b>Parola:</b> urðu (sono diventati)<br><b>Domanda:</b> Perché i bambini <u><b>sono diventati</b></u> così felici ieri?",
-            "ja": "<b>単語:</b> urðu (なった)<br><b>質問:</b> 昨日、なぜ子供たちはあんなに嬉しく<u><b>なった</b></u>のですか？",
-            "zh": "<b>单词:</b> urðu (变得)<br><b>问题:</b> 为什么孩子们昨天<u><b>变得</b></u>那么高兴？",
-            "ku": "<b>Peyv:</b> urðu (bûn)<br><b>Pirs:</b> Çima zarok duh wisa dilxweş <u><b>bûn</b></u>?",
-            "lv": "<b>Vārds:</b> urðu (kļuva)<br><b>Jautājums:</b> Kāpēc bērni vakar <u><b>kļuva</b></u> tik priecīgi?",
-            "lt": "<b>Žodis:</b> urðu (tapo)<br><b>Klausimas:</b> Kodėl vaikai vakar <u><b>tapo</b></u> tokie džiaugsmingi?",
-            "no": "<b>Ord:</b> urðu (ble)<br><b>Spørsmål:</b> Hvorfor <u><b>ble</b></u> barna så glade i går?",
-            "fa": "<div dir='rtl'><b>کلمه:</b> urðu (شدند)<br><b>سوال:</b> چرا بچه‌ها دیروز آنقدر خوشحال <u><b>شدند</b></u>؟</div>",
-            "pt": "<b>Palavra:</b> urðu (ficaram / tornaram-se)<br><b>Pergunta:</b> Por que as crianças <u><b>ficaram</b></u> tão felizes ontem?",
-            "pl": "<b>Słowo:</b> urðu (stali się)<br><b>Pytanie:</b> Dlaczego dzieci <u><b>stały się</b></u> wczoraj takie szczęśliwe?",
-            "ro": "<b>Cuvânt:</b> urðu (au devenit)<br><b>Întrebare:</b> De ce <u><b>au devenit</b></u> copiii atât de fericiți ieri?",
-            "ru": "<b>Слово:</b> urðu (стали)<br><b>Вопрос:</b> Почему дети вчера <u><b>стали</b></u> такими радостными?",
-            "es": "<b>Palabra:</b> urðu (se volvieron / se pusieron)<br><b>Pregunta:</b> ¿Por qué los niños <u><b>se pusieron</b></u> tan felices ayer?",
-            "sv": "<b>Ord:</b> urðu (blev)<br><b>Fråga:</b> Varför <u><b>blev</b></u> barnen så glada igår?",
-            "th": "<b>คำศัพท์:</b> urðu (กลายเป็น/รู้สึก)<br><b>คำถาม:</b> ทำไมเมื่อวานเด็กๆ ถึง<u><b>รู้สึก</b></u>ดีใจกันขนาดนั้น?",
-            "de": "<b>Wort:</b> urðu (wurden)<br><b>Frage:</b> Warum <u><b>wurden</b></u> die Kinder gestern so glücklich?",
-            "uk": "<b>Слово:</b> urðu (стали)<br><b>Запитання:</b> Чому діти вчора <u><b>стали</b></u> такими щасливими?",
-            "vi": "<b>Từ:</b> urðu (đã trở nên)<br><b>Câu hỏi:</b> Tại sao hôm qua bọn trẻ lại <u><b>trở nên</b></u> vui vẻ như vậy?"
+            "en": "<b>Word:</b> finnst (find / think / feel)<br><b>Question:</b> What do you <u><b>find</b></u> most fun to do after school?<br><br><b>Suggestion:</b><br>• I find it most fun to go to practice, meet friends and eat good food.",
+            "pl": "<b>Słowo:</b> finnst (uważam/sądzę)<br><b>Pytanie:</b> Co <u><b>uważasz</b></u> za najprzyjemniejsze do robienia po szkole?<br><br><b>Sugestia:</b><br>• Najwięcej przyjemności sprawia mi pójście na trening, spotkanie z przyjaciółmi i zjedzenie dobrego jedzenia.",
+            "da": "<b>Ord:</b> finnst (synes)<br><b>Spørgsmål:</b> Hvad <u><b>synes</b></u> du er sjovest at lave efter skole?<br><br><b>Forslag:</b><br>• Jeg synes det er sjovest at tage til træning, møde venner og spise god mad.",
+            "es": "<b>Palabra:</b> finnst (parece / piensa)<br><b>Pregunta:</b> ¿Qué te <u><b>parece</b></u> más divertido hacer después de la escuela?<br><br><b>Sugerencia:</b><br>• Lo que más me divierte es ir a entrenar, encontrarme con amigos y comer buena comida.",
+            "uk": "<b>Слово:</b> finnst (здається / вважаю)<br><b>Запитання:</b> Що тобі <u><b>найбільше подобається</b></u> робити після школи?<br><br><b>Пропозиція:</b><br>• Найбільше мені подобається ходити на тренування, зустрічатися з друзями та їсти смачну їжу.",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> finnst (تجد)<br><b>السؤال:</b> ما هو أكثر شيء <u><b>تجد</b></u> متعة في القيام به بعد المدرسة؟<br><br><b>اقتراح:</b><br>• أجد أن أمتع شيء هو الذهاب إلى التمرين ومقابلة الأصدقاء وتناول طعام جيد.</div>",
+            "tl": "<b>Salita:</b> finnst (sa tingin / pakiramdam)<br><b>Tanong:</b> Ano sa <u><b>tingin</b></u> mo ang pinakamasayang gawin pagkatapos ng paaralan?<br><br><b>Mungkahi:</b><br>• Pinakagusto kong pumunta sa training, makipagkita sa mga kaibigan, at kumain ng masarap na pagkain.",
+            "vi": "<b>Từ:</b> finnst (thấy / nghĩ)<br><b>Câu hỏi:</b> Bạn <u><b>thấy</b></u> điều gì thú vị nhất để làm sau giờ học?<br><br><b>Gợi ý:</b><br>• Tôi thấy thú vị nhất là đi tập luyện, gặp gỡ bạn bè và ăn đồ ăn ngon."
         }
     },
     { 
-        text: "fyrsta", 
+        text: "mig", 
         html_content: `
-            <div class="question-text">❓ Hvað gerðir þú <u><b>fyrsta</b></u> daginn þinn á Íslandi?</div>
-            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <div class="question-text">❓ Getur þú skilið <u><b>mig</b></u> vel þegar ég tala íslensku?</div>
+            <div class="suggestion-title">💡 Tillaga að svari:</div>
             <ul class="suggestions">
-                <li>Fyrsta daginn fór ég beint heim að sofa eftir flugið.</li>
-                <li>Ég fór út að ganga og skoða Reykjavík.</li>
-                <li>Fyrsta daginn minn var mjög kaldur, svo ég var bara inni.</li>
+                <li>Já, ég get skilið þig mjög vel.</li>
             </ul>
         `,
         translations: {
-            "ar": "<div dir='rtl'><b>الكلمة:</b> fyrsta (الأول)<br><b>السؤال:</b> ماذا فعلت في يومك <u><b>الأول</b></u> في آيسلندا؟</div>",
-            "be": "<b>Woord:</b> fyrsta (eerste)<br><b>Vraag:</b> Wat deed je op je <u><b>eerste</b></u> dag in IJsland?",
-            "da": "<b>Ord:</b> fyrsta (første)<br><b>Spørgsmål:</b> Hvad lavede du din <u><b>første</b></u> dag i Island?",
-            "en": "<b>Word:</b> fyrsta (first)<br><b>Question:</b> What did you do on your <u><b>first</b></u> day in Iceland?",
-            "tl": "<b>Salita:</b> fyrsta (una)<br><b>Tanong:</b> Ano ang ginawa mo sa iyong <u><b>unang</b></u> araw sa Iceland?",
-            "fi": "<b>Sana:</b> fyrsta (ensimmäisenä)<br><b>Kysymys:</b> Mitä teit <u><b>ensimmäisenä</b></u> päivänäsi Islannissa?",
-            "fr": "<b>Mot:</b> fyrsta (premier)<br><b>Question:</b> Qu'as-tu fait ton <u><b>premier</b></u> jour en Islande ?",
-            "fo": "<b>Orð:</b> fyrsta (fyrsta)<br><b>Spurningur:</b> Hvat gjørdi tú <u><b>fyrsta</b></u> dagin tín í Íslandi?",
-            "kl": "<b>Oqaaseq:</b> fyrsta (siulleq)<br><b>Apeqqut:</b> Islandimi ullunni <u><b>siullermi</b></u> suna suliaraajuk?",
-            "nl": "<b>Woord:</b> fyrsta (eerste)<br><b>Vraag:</b> Wat deed je op je <u><b>eerste</b></u> dag in IJsland?",
-            "it": "<b>Parola:</b> fyrsta (primo)<br><b>Domanda:</b> Cosa hai fatto il tuo <u><b>primo</b></u> giorno in Islanda?",
-            "ja": "<b>単語:</b> fyrsta (最初の)<br><b>質問:</b> アイスランドでの<u><b>最初</b></u>の日は何をしましたか？",
-            "zh": "<b>单词:</b> fyrsta (第一)<br><b>问题:</b> 你在冰岛的<u><b>第一</b></u>天做了什么？",
-            "ku": "<b>Peyv:</b> fyrsta (yekem)<br><b>Pirs:</b> Roja te ya <u><b>yekem</b></u> li Îzlandayê te çi kir?",
-            "lv": "<b>Vārds:</b> fyrsta (pirmajā)<br><b>Jautājums:</b> Ko tu darīji savā <u><b>pirmajā</b></u> dienā Islandē?",
-            "lt": "<b>Žodis:</b> fyrsta (pirmąją)<br><b>Klausimas:</b> Ką darei savo <u><b>pirmąją</b></u> dieną Islandijoje?",
-            "no": "<b>Ord:</b> fyrsta (første)<br><b>Spørsmål:</b> Hva gjorde du din <u><b>første</b></u> dag i Island?",
-            "fa": "<div dir='rtl'><b>کلمه:</b> fyrsta (اولین)<br><b>سوال:</b> در <u><b>اولین</b></u> روز خود در ایسلند چه کار کردی؟</div>",
-            "pt": "<b>Palavra:</b> fyrsta (primeiro)<br><b>Pergunta:</b> O que você fez no seu <u><b>primeiro</b></u> dia na Islândia?",
-            "pl": "<b>Słowo:</b> fyrsta (pierwszy)<br><b>Pytanie:</b> Co robiłeś/aś swojego <u><b>pierwszego</b></u> dnia na Islandii?",
-            "ro": "<b>Cuvânt:</b> fyrsta (prima)<br><b>Întrebare:</b> Ce ai făcut în <u><b>prima</b></u> ta zi în Islanda?",
-            "ru": "<b>Слово:</b> fyrsta (первый)<br><b>Вопрос:</b> Что ты делал в свой <u><b>первый</b></u> день в Исландии?",
-            "es": "<b>Palabra:</b> fyrsta (primer)<br><b>Pregunta:</b> ¿Qué hiciste tu <u><b>primer</b></u> día en Islandia?",
-            "sv": "<b>Ord:</b> fyrsta (första)<br><b>Fråga:</b> Vad gjorde du din <u><b>första</b></u> dag på Island?",
-            "th": "<b>คำศัพท์:</b> fyrsta (แรก)<br><b>คำถาม:</b> วัน<u><b>แรก</b></u>ของคุณในไอซ์แลนด์ คุณทำอะไรบ้าง?",
-            "de": "<b>Wort:</b> fyrsta (ersten)<br><b>Frage:</b> Was hast du an deinem <u><b>ersten</b></u> Tag in Island gemacht?",
-            "uk": "<b>Слово:</b> fyrsta (перший)<br><b>Запитання:</b> Що ти робив у свій <u><b>перший</b></u> день в Ісландії?",
-            "vi": "<b>Từ:</b> fyrsta (đầu tiên)<br><b>Câu hỏi:</b> Bạn đã làm gì trong ngày <u><b>đầu tiên</b></u> ở Iceland?"
+            "en": "<b>Word:</b> mig (me)<br><b>Question:</b> Can you understand <u><b>me</b></u> well when I speak Icelandic?<br><br><b>Suggestion:</b><br>• Yes, I can understand you very well.",
+            "pl": "<b>Słowo:</b> mig (mnie)<br><b>Pytanie:</b> Czy dobrze <u><b>mnie</b></u> rozumiesz, kiedy mówię po islandzku?<br><br><b>Sugestia:</b><br>• Tak, bardzo dobrze cię rozumiem.",
+            "da": "<b>Ord:</b> mig (mig)<br><b>Spørgsmål:</b> Kan du forstå <u><b>mig</b></u> godt, når jeg taler islandsk?<br><br><b>Forslag:</b><br>• Ja, jeg kan forstå dig meget godt.",
+            "es": "<b>Palabra:</b> mig (me / a mí)<br><b>Pregunta:</b> ¿<u><b>Me</b></u> puedes entender bien cuando hablo islandés?<br><br><b>Sugerencia:</b><br>• Sí, te puedo entender muy bien.",
+            "uk": "<b>Слово:</b> mig (мене)<br><b>Запитання:</b> Ти добре <u><b>мене</b></u> розумієш, коли я розмовляю ісландською?<br><br><b>Пропозиція:</b><br>• Так, я дуже добре тебе розумію.",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> mig (ني/أنا)<br><b>السؤال:</b> هل تستطيع فهـ<u><b>ـمي</b></u> جيداً عندما أتحدث الآيسلندية؟<br><br><b>اقتراح:</b><br>• نعم، أستطيع فهمك جيداً جداً.</div>",
+            "tl": "<b>Salita:</b> mig (ako)<br><b>Tanong:</b> Naiintindihan mo ba <u><b>ako</b></u> nang mabuti kapag nagsasalita ako ng Icelandic?<br><br><b>Mungkahi:</b><br>• Oo, naiintindihan kita nang napakabuti.",
+            "vi": "<b>Từ:</b> mig (tôi)<br><b>Câu hỏi:</b> Bạn có thể hiểu <u><b>tôi</b></u> rõ khi tôi nói tiếng Iceland không?<br><br><b>Gợi ý:</b><br>• Có, tôi có thể hiểu bạn rất rõ."
         }
     },
     { 
-        text: "meðal", 
+        text: "ekkert", 
         html_content: `
-            <div class="question-text">❓ Hvað er vinsælast <u><b>meðal</b></u> unglinga í dag?</div>
-            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <div class="question-text">❓ Hvaða orð er andheiti orðsins <u><b>ekkert</b></u>?</div>
+            <div class="suggestion-title">💡 Tillaga að svari:</div>
             <ul class="suggestions">
-                <li>Ég held að TikTok sé vinsælast meðal unglinga núna.</li>
-                <li>Það er mjög vinsælt að spila tölvuleiki og hitta vini.</li>
-                <li>Að fara í ræktina er mjög vinsælt meðal unglinga.</li>
+                <li>Ég held að andheiti orðsins ekkert er ………………..</li>
             </ul>
         `,
         translations: {
-            "ar": "<div dir='rtl'><b>الكلمة:</b> meðal (بين / في أوساط)<br><b>السؤال:</b> ما هو الأكثر شعبية <u><b>بين</b></u> المراهقين اليوم؟</div>",
-            "be": "<b>Woord:</b> meðal (onder)<br><b>Vraag:</b> Wat is tegenwoordig het populairst <u><b>onder</b></u> tieners?",
-            "da": "<b>Ord:</b> meðal (blandt)<br><b>Spørgsmål:</b> Hvad er mest populært <u><b>blandt</b></u> teenagere i dag?",
-            "en": "<b>Word:</b> meðal (among)<br><b>Question:</b> What is most popular <u><b>among</b></u> teenagers today?",
-            "tl": "<b>Salita:</b> meðal (sa mga / kabilang sa)<br><b>Tanong:</b> Ano ang pinakasikat <u><b>sa mga</b></u> tinedyer ngayon?",
-            "fi": "<b>Sana:</b> meðal (joukossa / keskuudessa)<br><b>Kysymys:</b> Mikä on suosituinta teini-ikäisten <u><b>keskuudessa</b></u> nykyään?",
-            "fr": "<b>Mot:</b> meðal (parmi)<br><b>Question:</b> Qu'est-ce qui est le plus populaire <u><b>parmi</b></u> les adolescents aujourd'hui ?",
-            "fo": "<b>Orð:</b> meðal (millum / ímillum)<br><b>Spurningur:</b> Hvat er best umtókt <u><b>millum</b></u> unglingar í dag?",
-            "kl": "<b>Oqaaseq:</b> meðal (akornanni)<br><b>Apeqqut:</b> Inuusuttut <u><b>akornanni</b></u> suna ullumikkut nuannarineqarnerpaava?",
-            "nl": "<b>Woord:</b> meðal (onder)<br><b>Vraag:</b> Wat is het populairst <u><b>onder</b></u> tieners tegenwoordig?",
-            "it": "<b>Parola:</b> meðal (tra / fra)<br><b>Domanda:</b> Cosa è più popolare <u><b>tra</b></u> gli adolescenti oggi?",
-            "ja": "<b>単語:</b> meðal (～の間で)<br><b>質問:</b> 今、10代の若者の<u><b>間で</b></u>一番人気のあるものは何ですか？",
-            "zh": "<b>单词:</b> meðal (在...之中)<br><b>问题:</b> 如今在青少年<u><b>之中</b></u>最流行的是什么？",
-            "ku": "<b>Peyv:</b> meðal (di nav ... de)<br><b>Pirs:</b> Îro <u><b>di nav</b></u> xortan de ya herî populer çi ye?",
-            "lv": "<b>Vārds:</b> meðal (starp / vidū)<br><b>Jautājums:</b> Kas mūsdienās ir vispopulārākais pusaudžu <u><b>vidū</b></u>?",
-            "lt": "<b>Žodis:</b> meðal (tarp)<br><b>Klausimas:</b> Kas šiais laikais populiariausia <u><b>tarp</b></u> paauglių?",
-            "no": "<b>Ord:</b> meðal (blant)<br><b>Spørsmål:</b> Hva er mest populært <u><b>blant</b></u> tenåringer i dag?",
-            "fa": "<div dir='rtl'><b>کلمه:</b> meðal (در میان)<br><b>سوال:</b> امروزه چه چیزی <u><b>در میان</b></u> نوجوانان محبوب‌تر است؟</div>",
-            "pt": "<b>Palavra:</b> meðal (entre)<br><b>Pergunta:</b> O que é mais popular <u><b>entre</b></u> os adolescentes hoje em dia?",
-            "pl": "<b>Słowo:</b> meðal (wśród)<br><b>Pytanie:</b> Co jest dzisiaj najpopularniejsze <u><b>wśród</b></u> nastolatków?",
-            "ro": "<b>Cuvânt:</b> meðal (printre)<br><b>Întrebare:</b> Ce este cel mai popular <u><b>printre</b></u> adolescenți în ziua de azi?",
-            "ru": "<b>Слово:</b> meðal (среди)<br><b>Вопрос:</b> Что самое популярное <u><b>среди</b></u> подростков сегодня?",
-            "es": "<b>Palabra:</b> meðal (entre)<br><b>Pregunta:</b> ¿Qué es lo más popular <u><b>entre</b></u> los adolescentes hoy en día?",
-            "sv": "<b>Ord:</b> meðal (bland)<br><b>Fråga:</b> Vad är mest populärt <u><b>bland</b></u> tonåringar idag?",
-            "th": "<b>คำศัพท์:</b> meðal (ในหมู่)<br><b>คำถาม:</b> สิ่งใดเป็นที่นิยมที่สุด<u><b>ในหมู่</b></u>วัยรุ่นปัจจุบัน?",
-            "de": "<b>Wort:</b> meðal (unter / zwischen)<br><b>Frage:</b> Was ist heute <u><b>unter</b></u> Teenagern am beliebtesten?",
-            "uk": "<b>Слово:</b> meðal (серед)<br><b>Запитання:</b> Що є найпопулярнішим <u><b>серед</b></u> підлітків сьогодні?",
-            "vi": "<b>Từ:</b> meðal (trong số / giữa)<br><b>Câu hỏi:</b> Điều gì phổ biến nhất <u><b>trong giới</b></u> thanh thiếu niên hiện nay?"
+            "en": "<b>Word:</b> ekkert (nothing)<br><b>Question:</b> What word is the antonym of the word '<u><b>nothing</b></u>'?<br><br><b>Suggestion:</b><br>• I think the antonym of the word nothing is ………………..",
+            "pl": "<b>Słowo:</b> ekkert (nic)<br><b>Pytanie:</b> Jakie słowo jest przeciwieństwem słowa '<u><b>nic</b></u>'?<br><br><b>Sugestia:</b><br>• Myślę, że przeciwieństwem słowa nic jest ………………..",
+            "da": "<b>Ord:</b> ekkert (ingenting)<br><b>Spørgsmål:</b> Hvilket ord er antonymet (modsætningen) til ordet '<u><b>ingenting</b></u>'?<br><br><b>Forslag:</b><br>• Jeg tror, antonymet til ordet ingenting er ………………..",
+            "es": "<b>Palabra:</b> ekkert (nada)<br><b>Pregunta:</b> ¿Qué palabra es el antónimo de la palabra '<u><b>nada</b></u>'?<br><br><b>Sugerencia:</b><br>• Creo que el antónimo de la palabra nada es ………………..",
+            "uk": "<b>Слово:</b> ekkert (нічого)<br><b>Запитання:</b> Яке слово є антонімом до слова '<u><b>нічого</b></u>'?<br><br><b>Пропозиція:</b><br>• Я думаю, що антонім до слова нічого — це ………………..",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> ekkert (لا شيء)<br><b>السؤال:</b> ما هي الكلمة المضادة لكلمة '<u><b>لا شيء</b></u>'؟<br><br><b>اقتراح:</b><br>• أعتقد أن الكلمة المضادة لكلمة لا شيء هي ………………..</div>",
+            "tl": "<b>Salita:</b> ekkert (wala)<br><b>Tanong:</b> Anong salita ang kasalungat ng salitang '<u><b>wala</b></u>'?<br><br><b>Mungkahi:</b><br>• Sa tingin ko ang kasalungat ng salitang wala ay ………………..",
+            "vi": "<b>Từ:</b> ekkert (không có gì)<br><b>Câu hỏi:</b> Từ nào là từ trái nghĩa của từ '<u><b>không có gì</b></u>'?<br><br><b>Gợi ý:</b><br>• Tôi nghĩ từ trái nghĩa của không có gì là ……………….."
         }
     },
     { 
-        text: "vinna", 
+        text: "hefði", 
         html_content: `
-            <div class="question-text">❓ Hvað langar þig að <u><b>vinna</b></u> við í framtíðinni?</div>
-            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <div class="question-text">❓ Hvort <u><b>hefði</b></u> verið betra að mæta snemma eða seint í skólann í morgun?</div>
+            <div class="suggestion-title">💡 Tillaga að svari:</div>
             <ul class="suggestions">
-                <li>Mig langar að vinna sem kennari eða læknir.</li>
-                <li>Ég vil vinna við tölvur og forritun.</li>
-                <li>Ég er ekki alveg viss ennþá, en eitthvað skemmtilegt.</li>
+                <li>Það hefði verið betra að mæta …….</li>
             </ul>
         `,
         translations: {
-            "ar": "<div dir='rtl'><b>الكلمة:</b> vinna (العمل / يعمل)<br><b>السؤال:</b> ماذا تريد أن <u><b>تعمل</b></u> في المستقبل؟</div>",
-            "be": "<b>Woord:</b> vinna (werken)<br><b>Vraag:</b> Wat wil je in de toekomst <u><b>werken</b></u> (doen als beroep)?",
-            "da": "<b>Ord:</b> vinna (arbejde)<br><b>Spørgsmål:</b> Hvad vil du gerne <u><b>arbejde</b></u> med i fremtiden?",
-            "en": "<b>Word:</b> vinna (work)<br><b>Question:</b> What do you want to <u><b>work</b></u> with in the future?",
-            "tl": "<b>Salita:</b> vinna (trabaho / magtrabaho)<br><b>Tanong:</b> Ano ang gusto mong <u><b>trabaho</b></u> sa hinaharap?",
-            "fi": "<b>Sana:</b> vinna (työskennellä)<br><b>Kysymys:</b> Minkä parissa haluaisit <u><b>työskennellä</b></u> tulevaisuudessa?",
-            "fr": "<b>Mot:</b> vinna (travailler)<br><b>Question:</b> Dans quel domaine aimerais-tu <u><b>travailler</b></u> à l'avenir ?",
-            "fo": "<b>Orð:</b> vinna (arbeiða)<br><b>Spurningur:</b> Hvat hevur tú hug at <u><b>arbeiða</b></u> við í framtíðini?",
-            "kl": "<b>Oqaaseq:</b> vinna (suliaqarneq)<br><b>Apeqqut:</b> Siunissami sunik <u><b>suliaqarusuppit</b></u>?",
-            "nl": "<b>Woord:</b> vinna (werken)<br><b>Vraag:</b> Wat wil je in de toekomst voor <u><b>werk</b></u> doen?",
-            "it": "<b>Parola:</b> vinna (lavorare)<br><b>Domanda:</b> Con cosa vorresti <u><b>lavorare</b></u> in futuro?",
-            "ja": "<b>単語:</b> vinna (働く)<br><b>質問:</b> 将来、どんな<u><b>仕事</b></u>をしたいですか？",
-            "zh": "<b>单词:</b> vinna (工作)<br><b>问题:</b> 你将来想从事什么<u><b>工作</b></u>？",
-            "ku": "<b>Peyv:</b> vinna (kar / xebat)<br><b>Pirs:</b> Tu dixwazî di pêşerojê de bi çi <u><b>karî</b></u> bikî?",
-            "lv": "<b>Vārds:</b> vinna (strādāt)<br><b>Jautājums:</b> Par ko tu vēlētos <u><b>strādāt</b></u> nākotnē?",
-            "lt": "<b>Žodis:</b> vinna (dirbti)<br><b>Klausimas:</b> Kokį <u><b>darbą</b></u> norėtum dirbti ateityje?",
-            "no": "<b>Ord:</b> vinna (arbeide / jobbe)<br><b>Spørsmål:</b> Hva har du lyst til å <u><b>jobbe</b></u> med i fremtiden?",
-            "fa": "<div dir='rtl'><b>کلمه:</b> vinna (کار کردن)<br><b>سوال:</b> دوست داری در آینده در چه زمینه‌ای <u><b>کار</b></u> کنی؟</div>",
-            "pt": "<b>Palavra:</b> vinna (trabalhar)<br><b>Pergunta:</b> Com o que você quer <u><b>trabalhar</b></u> no futuro?",
-            "pl": "<b>Słowo:</b> vinna (pracować)<br><b>Pytanie:</b> Czym chciałbyś/chciałabyś zajmować się w <u><b>pracy</b></u> w przyszłości?",
-            "ro": "<b>Cuvânt:</b> vinna (a lucra)<br><b>Întrebare:</b> Ce ai vrea să <u><b>lucrezi</b></u> în viitor?",
-            "ru": "<b>Слово:</b> vinna (работать)<br><b>Вопрос:</b> Кем ты хочешь <u><b>работать</b></u> в будущем?",
-            "es": "<b>Palabra:</b> vinna (trabajar)<br><b>Pregunta:</b> ¿En qué te gustaría <u><b>trabajar</b></u> en el futuro?",
-            "sv": "<b>Ord:</b> vinna (arbeta / jobba)<br><b>Fråga:</b> Vad vill du <u><b>jobba</b></u> med i framtiden?",
-            "th": "<b>คำศัพท์:</b> vinna (ทำงาน)<br><b>คำถาม:</b> ในอนาคตคุณอยาก<u><b>ทำงาน</b></u>อะไร?",
-            "de": "<b>Wort:</b> vinna (arbeiten)<br><b>Frage:</b> Womit möchtest du in Zukunft <u><b>arbeiten</b></u>?",
-            "uk": "<b>Слово:</b> vinna (працювати)<br><b>Запитання:</b> Ким ти хочеш <u><b>працювати</b></u> в майбутньому?",
-            "vi": "<b>Từ:</b> vinna (làm việc)<br><b>Câu hỏi:</b> Bạn muốn <u><b>làm công việc</b></u> gì trong tương lai?"
+            "en": "<b>Word:</b> hefði (would have / had)<br><b>Question:</b> <u><b>Would it have</b></u> been better to arrive early or late to school this morning?<br><br><b>Suggestion:</b><br>• It would have been better to arrive …….",
+            "pl": "<b>Słowo:</b> hefði (byłby / miałby)<br><b>Pytanie:</b> Czy <u><b>byłoby</b></u> lepiej przyjść wcześnie czy późno do szkoły dzisiejszego ranka?<br><br><b>Sugestia:</b><br>• Byłoby lepiej przyjść …….",
+            "da": "<b>Ord:</b> hefði (ville have / havde)<br><b>Spørgsmål:</b> <u><b>Ville det have</b></u> været bedre at møde tidligt eller sent i skole i morges?<br><br><b>Forslag:</b><br>• Det ville have været bedre at møde …….",
+            "es": "<b>Palabra:</b> hefði (habría / hubiera)<br><b>Pregunta:</b> ¿<u><b>Habría</b></u> sido mejor llegar temprano o tarde a la escuela esta mañana?<br><br><b>Sugerencia:</b><br>• Habría sido mejor llegar …….",
+            "uk": "<b>Слово:</b> hefði (було б / мав би)<br><b>Запитання:</b> Чи <u><b>було б</b></u> краще прийти рано чи пізно до школи сьогодні вранці?<br><br><b>Пропозиція:</b><br>• Було б краще прийти …….",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> hefði (كان سيكون)<br><b>السؤال:</b> هل <u><b>كان سيكون</b></u> من الأفضل الوصول مبكراً أم متأخراً إلى المدرسة هذا الصباح؟<br><br><b>اقتراح:</b><br>• كان سيكون من الأفضل الوصول …… .</div>",
+            "tl": "<b>Salita:</b> hefði (sana / sana ay)<br><b>Tanong:</b> Mas mabuti kaya <u><b>sana</b></u> kung dumating nang maaga o huli sa paaralan ngayong umaga?<br><br><b>Mungkahi:</b><br>• Mas mabuti sana kung dumating nang …….",
+            "vi": "<b>Từ:</b> hefði (sẽ có / đã có)<br><b>Câu hỏi:</b> Sáng nay đến trường sớm hay muộn thì <u><b>sẽ</b></u> tốt hơn?<br><br><b>Gợi ý:</b><br>• Sẽ tốt hơn nếu đến ……."
         }
     },
     { 
-        text: "þessa", 
+        text: "sinn", 
         html_content: `
-            <div class="question-text">❓ Af hverju valdir þú að lesa <u><b>þessa</b></u> bók?</div>
-            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <div class="question-text">❓ Hvar á nemandi helst að geyma símann <u><b>sinn</b></u> þegar hann er í kennslustund?</div>
+            <div class="suggestion-title">💡 Tillaga að svari:</div>
             <ul class="suggestions">
-                <li>Af því að vinur minn sagði að hún væri mjög góð.</li>
-                <li>Af því að þessi bók lítur út fyrir að vera spennandi.</li>
-                <li>Kennarinn bað okkur um að lesa þessa bók.</li>
+                <li>Nemandi á að geyma símann sinn í töskunni.</li>
             </ul>
         `,
         translations: {
-            "ar": "<div dir='rtl'><b>الكلمة:</b> þessa (هذا/هذه)<br><b>السؤال:</b> لماذا اخترت قراءة <u><b>هذا</b></u> الكتاب؟</div>",
-            "be": "<b>Woord:</b> þessa (dit/deze)<br><b>Vraag:</b> Waarom heb je ervoor gekozen om <u><b>dit</b></u> boek te lezen?",
-            "da": "<b>Ord:</b> þessa (denne)<br><b>Spørgsmål:</b> Hvorfor valgte du at læse <u><b>denne</b></u> bog?",
-            "en": "<b>Word:</b> þessa (this)<br><b>Question:</b> Why did you choose to read <u><b>this</b></u> book?",
-            "tl": "<b>Salita:</b> þessa (ito)<br><b>Tanong:</b> Bakit mo piniling basahin <u><b>itong</b></u> libro?",
-            "fi": "<b>Sana:</b> þessa (tämän)<br><b>Kysymys:</b> Miksi valitsit lukea <u><b>tämän</b></u> kirjan?",
-            "fr": "<b>Mot:</b> þessa (ce/cette)<br><b>Question:</b> Pourquoi as-tu choisi de lire <u><b>ce</b></u> livre ?",
-            "fo": "<b>Orð:</b> þessa (hesa)<br><b>Spurningur:</b> Hví valdi tú at lesa <u><b>hesa</b></u> bókina?",
-            "kl": "<b>Oqaaseq:</b> þessa (una)<br><b>Apeqqut:</b> Sooq atuagaq <u><b>una</b></u> atuarumallugu toqqarpiuk?",
-            "nl": "<b>Woord:</b> þessa (dit/deze)<br><b>Vraag:</b> Waarom koos je ervoor om <u><b>dit</b></u> boek te lezen?",
-            "it": "<b>Parola:</b> þessa (questo/questa)<br><b>Domanda:</b> Perché hai scelto di leggere <u><b>questo</b></u> libro?",
-            "ja": "<b>単語:</b> þessa (この)<br><b>質問:</b> なぜ<u><b>この</b></u>本を読もうと選んだのですか？",
-            "zh": "<b>单词:</b> þessa (这本)<br><b>问题:</b> 你为什么选择读<u><b>这本</b></u>书？",
-            "ku": "<b>Peyv:</b> þessa (vê)<br><b>Pirs:</b> Çima te hilbijart ku tu <u><b>vê</b></u> pirtûkê bixwînî?",
-            "lv": "<b>Vārds:</b> þessa (šo)<br><b>Jautājums:</b> Kāpēc tu izvēlējies lasīt <u><b>šo</b></u> grāmatu?",
-            "lt": "<b>Žodis:</b> þessa (šią)<br><b>Klausimas:</b> Kodėl pasirinkai skaityti <u><b>šią</b></u> knygą?",
-            "no": "<b>Ord:</b> þessa (denne)<br><b>Spørsmål:</b> Hvorfor valgte du å lese <u><b>denne</b></u> boken?",
-            "fa": "<div dir='rtl'><b>کلمه:</b> þessa (این)<br><b>سوال:</b> چرا خواندن <u><b>این</b></u> کتاب را انتخاب کردی؟</div>",
-            "pt": "<b>Palavra:</b> þessa (este/esta)<br><b>Pergunta:</b> Por que você escolheu ler <u><b>este</b></u> livro?",
-            "pl": "<b>Słowo:</b> þessa (tę)<br><b>Pytanie:</b> Dlaczego wybrałeś/aś przeczytanie <u><b>tej</b></u> książki?",
-            "ro": "<b>Cuvânt:</b> þessa (această)<br><b>Întrebare:</b> De ce ai ales să citești <u><b>această</b></u> carte?",
-            "ru": "<b>Слово:</b> þessa (эту)<br><b>Вопрос:</b> Почему ты решил прочитать <u><b>эту</b></u> книгу?",
-            "es": "<b>Palabra:</b> þessa (este/esta)<br><b>Pregunta:</b> ¿Por qué elegiste leer <u><b>este</b></u> libro?",
-            "sv": "<b>Ord:</b> þessa (denna)<br><b>Fråga:</b> Varför valde du att läsa <u><b>den här</b></u> boken?",
-            "th": "<b>คำศัพท์:</b> þessa (เล่มนี้)<br><b>คำถาม:</b> ทำไมคุณถึงเลือกอ่านหนังสือ<u><b>เล่มนี้</b></u>?",
-            "de": "<b>Wort:</b> þessa (dieses/diese)<br><b>Frage:</b> Warum hast du dich entschieden, <u><b>dieses</b></u> Buch zu lesen?",
-            "uk": "<b>Слово:</b> þessa (цю)<br><b>Запитання:</b> Чому ти вибрав прочитати <u><b>цю</b></u> книгу?",
-            "vi": "<b>Từ:</b> þessa (cuốn này)<br><b>Câu hỏi:</b> Tại sao bạn chọn đọc cuốn sách <u><b>này</b></u>?"
+            "en": "<b>Word:</b> sinn (his/her/their own)<br><b>Question:</b> Where should a student ideally keep <u><b>their</b></u> phone during class?<br><br><b>Suggestion:</b><br>• A student should keep their phone in their bag.",
+            "pl": "<b>Słowo:</b> sinn (swój)<br><b>Pytanie:</b> Gdzie uczeń powinien najlepiej trzymać <u><b>swój</b></u> telefon podczas lekcji?<br><br><b>Sugestia:</b><br>• Uczeń powinien trzymać swój telefon w torbie.",
+            "da": "<b>Ord:</b> sinn (sin/sit)<br><b>Spørgsmål:</b> Hvor bør en elev helst opbevare <u><b>sin</b></u> telefon, når han/hun er i time?<br><br><b>Forslag:</b><br>• En elev bør opbevare sin telefon i tasken.",
+            "es": "<b>Palabra:</b> sinn (su / su propio)<br><b>Pregunta:</b> ¿Dónde debería idealmente un estudiante guardar <u><b>su</b></u> teléfono durante la clase?<br><br><b>Sugerencia:</b><br>• Un estudiante debe guardar su teléfono en su mochila.",
+            "uk": "<b>Слово:</b> sinn (свій)<br><b>Запитання:</b> Де учню найкраще зберігати <u><b>свій</b></u> телефон під час уроку?<br><br><b>Пропозиція:</b><br>• Учень повинен зберігати свій телефон у сумці.",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> sinn (الخاص به/بها)<br><b>السؤال:</b> أين يجب على الطالب أن يحتفظ بهاتفه <u><b>الخاص</b></u> أثناء الحصة؟<br><br><b>اقتراح:</b><br>• يجب على الطالب أن يحتفظ بهاتفه في حقيبته.</div>",
+            "tl": "<b>Salita:</b> sinn (kanyang sarili)<br><b>Tanong:</b> Saan pinakamabuting itago ng estudyante ang <u><b>kanyang</b></u> telepono habang may klase?<br><br><b>Mungkahi:</b><br>• Dapat itago ng estudyante ang kanyang telepono sa bag.",
+            "vi": "<b>Từ:</b> sinn (của anh ấy/cô ấy/của mình)<br><b>Câu hỏi:</b> Học sinh nên cất điện thoại <u><b>của mình</b></u> ở đâu trong giờ học?<br><br><b>Gợi ý:</b><br>• Học sinh nên cất điện thoại của mình trong cặp."
         }
     },
     { 
-        text: "sögu", 
+        text: "mynd", 
         html_content: `
-            <div class="question-text">❓ Getur þú sagt mér stutta <u><b>sögu</b></u> frá heimalandi þínu?</div>
-            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <div class="question-text">❓ Tekur þú stundum <u><b>mynd</b></u> með símanum þínum í skólanum?</div>
+            <div class="suggestion-title">💡 Tillaga að svari:</div>
             <ul class="suggestions">
-                <li>Já, ég get sagt þér sögu af þekktri hetju frá landinu mínu.</li>
-                <li>Ég man því miður enga stutta sögu akkúrat núna.</li>
-                <li>Já, ég kann mjög góða sögu um dýr í skóginum.</li>
+                <li>Já, ég tek stundum mynd af verkefnum á töflunni til að muna þau betur.</li>
             </ul>
         `,
         translations: {
-            "ar": "<div dir='rtl'><b>الكلمة:</b> sögu (قصة)<br><b>السؤال:</b> هل يمكنك أن تخبرني <u><b>قصة</b></u> قصيرة من بلدك؟</div>",
-            "be": "<b>Woord:</b> sögu (verhaal)<br><b>Vraag:</b> Kun je me een kort <u><b>verhaal</b></u> uit je thuisland vertellen?",
-            "da": "<b>Ord:</b> sögu (historie)<br><b>Spørgsmål:</b> Kan du fortælle mig en kort <u><b>historie</b></u> fra dit hjemland?",
-            "en": "<b>Word:</b> sögu (story)<br><b>Question:</b> Can you tell me a short <u><b>story</b></u> from your home country?",
-            "tl": "<b>Salita:</b> sögu (kwento)<br><b>Tanong:</b> Pwede mo ba akong kwentuhan ng isang maikling <u><b>kwento</b></u> mula sa iyong bansa?",
-            "fi": "<b>Sana:</b> sögu (tarina / kertomus)<br><b>Kysymys:</b> Voitko kertoa minulle lyhyen <u><b>tarinan</b></u> kotimaastasi?",
-            "fr": "<b>Mot:</b> sögu (histoire)<br><b>Question:</b> Peux-tu me raconter une courte <u><b>histoire</b></u> de ton pays d'origine ?",
-            "fo": "<b>Orð:</b> sögu (søgu)<br><b>Spurningur:</b> Kanst tú siga mær eina stutta <u><b>søgu</b></u> úr heimlandi tínum?",
-            "kl": "<b>Oqaaseq:</b> sögu (oqaluttuaq)<br><b>Apeqqut:</b> Nunanit aggerfinnit <u><b>oqaluttuamik</b></u> naatsumik oqaluttuussinnaavinga?",
-            "nl": "<b>Woord:</b> sögu (verhaal)<br><b>Vraag:</b> Kun je me een kort <u><b>verhaal</b></u> uit je thuisland vertellen?",
-            "it": "<b>Parola:</b> sögu (storia / racconto)<br><b>Domanda:</b> Puoi raccontarmi una breve <u><b>storia</b></u> del tuo paese d'origine?",
-            "ja": "<b>単語:</b> sögu (物語 / 話)<br><b>質問:</b> あなたの母国の短い<u><b>物語（お話）</b></u>を教えてもらえますか？",
-            "zh": "<b>单词:</b> sögu (故事)<br><b>问题:</b> 你能给我讲一个来自你家乡的短<u><b>故事</b></u>吗？",
-            "ku": "<b>Peyv:</b> sögu (çîrok)<br><b>Pirs:</b> Ma tu dikarî <u><b>çîrokek</b></u> kurt ji welatê xwe ji min re bibêjî?",
-            "lv": "<b>Vārds:</b> sögu (stāsts)<br><b>Jautājums:</b> Vai vari pastāstīt man īsu <u><b>stāstu</b></u> no savas dzimtās valsts?",
-            "lt": "<b>Žodis:</b> sögu (istoriją / pasakojimą)<br><b>Klausimas:</b> Ar gali man papasakoti trumpą <u><b>istoriją</b></u> iš savo gimtosios šalies?",
-            "no": "<b>Ord:</b> sögu (historie / fortelling)<br><b>Spørsmål:</b> Kan du fortelle meg en kort <u><b>historie</b></u> fra hjemlandet ditt?",
-            "fa": "<div dir='rtl'><b>کلمه:</b> sögu (داستان)<br><b>سوال:</b> آیا می‌توانی یک <u><b>داستان</b></u> کوتاه از کشور خودت برای من تعریف کنی؟</div>",
-            "pt": "<b>Palavra:</b> sögu (história)<br><b>Pergunta:</b> Você pode me contar uma <u><b>história</b></u> curta do seu país de origem?",
-            "pl": "<b>Słowo:</b> sögu (historię / opowieść)<br><b>Pytanie:</b> Czy możesz opowiedzieć mi krótką <u><b>historię</b></u> ze swojego kraju?",
-            "ro": "<b>Cuvânt:</b> sögu (poveste)<br><b>Întrebare:</b> Poți să-mi spui o <u><b>poveste</b></u> scurtă din țara ta de origine?",
-            "ru": "<b>Слово:</b> sögu (история / рассказ)<br><b>Вопрос:</b> Можешь рассказать мне короткую <u><b>историю</b></u> из своей родной страны?",
-            "es": "<b>Palabra:</b> sögu (historia / cuento)<br><b>Pregunta:</b> ¿Puedes contarme una <u><b>historia</b></u> corta de tu país de origen?",
-            "sv": "<b>Ord:</b> sögu (berättelse / historia)<br><b>Fråga:</b> Kan du berätta en kort <u><b>berättelse</b></u> från ditt hemland för mig?",
-            "th": "<b>คำศัพท์:</b> sögu (เรื่องราว / นิทาน)<br><b>คำถาม:</b> คุณช่วยเล่า<u><b>เรื่องราว</b></u>สั้นๆ จากประเทศบ้านเกิดของคุณให้ฉันฟังได้ไหม?",
-            "de": "<b>Wort:</b> sögu (Geschichte)<br><b>Frage:</b> Kannst du mir eine kurze <u><b>Geschichte</b></u> aus deinem Heimatland erzählen?",
-            "uk": "<b>Слово:</b> sögu (історія / розповідь)<br><b>Запитання:</b> Можеш розповісти мені коротку <u><b>історію</b></u> зі своєї рідної країни?",
-            "vi": "<b>Từ:</b> sögu (câu chuyện)<br><b>Câu hỏi:</b> Bạn có thể kể cho tôi nghe một <u><b>câu chuyện</b></u> ngắn từ quê hương bạn không?"
+            "en": "<b>Word:</b> mynd (picture/photo)<br><b>Question:</b> Do you sometimes take a <u><b>picture</b></u> with your phone at school?<br><br><b>Suggestion:</b><br>• Yes, I sometimes take a picture of tasks on the board to remember them better.",
+            "pl": "<b>Słowo:</b> mynd (zdjęcie/obraz)<br><b>Pytanie:</b> Czy czasami robisz <u><b>zdjęcie</b></u> telefonem w szkole?<br><br><b>Sugestia:</b><br>• Tak, czasami robię zdjęcie zadań na tablicy, żeby je lepiej zapamiętać.",
+            "da": "<b>Ord:</b> mynd (billede)<br><b>Spørgsmål:</b> Tager du nogle gange et <u><b>billede</b></u> med din telefon i skolen?<br><br><b>Forslag:</b><br>• Ja, jeg tager nogle gange et billede af opgaver på tavlen for at huske dem bedre.",
+            "es": "<b>Palabra:</b> mynd (foto/imagen)<br><b>Pregunta:</b> ¿A veces tomas una <u><b>foto</b></u> con tu teléfono en la escuela?<br><br><b>Sugerencia:</b><br>• Sí, a veces tomo una foto de las tareas en la pizarra para recordarlas mejor.",
+            "uk": "<b>Слово:</b> mynd (картинка/фото)<br><b>Запитання:</b> Ти іноді робиш <u><b>фото</b></u> на свій телефон у школі?<br><br><b>Пропозиція:</b><br>• Так, я іноді роблю фото завдань на дошці, щоб краще їх запам'ятати.",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> mynd (صورة)<br><b>السؤال:</b> هل تلتقط أحياناً <u><b>صورة</b></u> بهاتفك في المدرسة؟<br><br><b>اقتراح:</b><br>• نعم، ألتقط أحياناً صورة للمهام على السبورة لأتذكرها بشكل أفضل.</div>",
+            "tl": "<b>Salita:</b> mynd (larawan/litrato)<br><b>Tanong:</b> Kumukuha ka ba minsan ng <u><b>litrato</b></u> gamit ang iyong telepono sa paaralan?<br><br><b>Mungkahi:</b><br>• Oo, minsan kumukuha ako ng litrato ng mga gawain sa pisara para mas matandaan ang mga ito.",
+            "vi": "<b>Từ:</b> mynd (bức ảnh)<br><b>Câu hỏi:</b> Bạn có thỉnh thoảng chụp <u><b>ảnh</b></u> bằng điện thoại ở trường không?<br><br><b>Gợi ý:</b><br>• Có, đôi khi tôi chụp ảnh các bài tập trên bảng để nhớ chúng tốt hơn."
         }
     }
 ];
@@ -757,7 +537,7 @@ function findNextUnfinished() {
         <div class="progress-container"><div id="progress-bar"></div></div>
         
         <div class="lang-selector">
-            <label for="languageSelect"><b>🌍 Þýðing (Orð og spurning):</b></label>
+            <label for="languageSelect"><b>🌍 Þýðing (Orð, spurning & tillögur):</b></label>
             <select id="languageSelect" onchange="updateUI()">
                 <option value="" selected disabled>Veldu tungumál...</option>
                 <option value="ar">Arabíska – العربية</option>
@@ -849,9 +629,9 @@ function updateUI() {
     document.getElementById('counter').innerText = `Spurning ${currentIndex + 1} af${exerciseData.length}`;
     
     if (!selectedLang) {
-        document.getElementById('media-box').innerHTML = "<i>Veldu tungumál úr listanum að ofan til að sjá þýðingu.</i>";
+        document.getElementById('media-box').innerHTML = "<i>Veldu tungumál úr listanum að ofan til að sjá þýðingu á spurningunni og svörunum.</i>";
     } else {
-        document.getElementById('media-box').innerHTML = curr.translations[selectedLang] || (curr.translations['en'] + "<br><br><i>(Ath: Þýðingu vantar, sýni ensku)</i>");
+        document.getElementById('media-box').innerHTML = curr.translations[selectedLang] || (curr.translations['en'] + "<br><br><i>(Ath: Þýðingu vantar á þessu tungumáli, sýni ensku)</i>");
     }
 
     const savedScore = userScores[currentIndex];
