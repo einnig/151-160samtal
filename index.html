@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samtal og Markorð: 151 - 160</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            background-color: #f0f4f8; 
+            margin: 0;
+            padding: 2vh 5vw; 
+            min-height: 95vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        .container { 
+            width: 100%; 
+            max-width: 1200px; 
+            background: white; 
+            padding: 30px 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            max-height: 100%;
+            overflow-y: auto;
+        }
+        h1 {
+            color: #1a73e8;
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        /* Framvindustika */
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            height: 20px;
+        }
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #34a853;
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+        }
+        
+        #counter { font-size: 1.2em; color: #666; font-weight: bold; margin-bottom: 10px; }
+
+        .lang-selector {
+            margin-bottom: 20px;
+            background: #fff3e0;
+            padding: 10px 15px;
+            border-radius: 10px;
+            display: inline-block;
+            border: 1px solid #ffcc80;
+        }
+
+        .lang-selector select {
+            padding: 8px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            margin-left: 10px;
+            max-width: 300px;
+        }
+        
+        #target { 
+            font-size: 3.5em; 
+            margin: 10px 0; 
+            color: #222; 
+            font-weight: bold;
+            background-color: #e8eaed;
+            display: inline-block;
+            padding: 5px 30px;
+            border-radius: 15px;
+        }
+        
+        #conversation-box {
+            font-size: 1.2em;
+            color: #333;
+            background-color: #e8f0fe;
+            padding: 20px 30px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 20px;
+            max-width: 85%;
+            line-height: 1.6;
+            text-align: left;
+            border-left: 8px solid #1a73e8;
+        }
+        .question-text {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #1a73e8;
+            margin-bottom: 15px;
+        }
+        .suggestion-title {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        ul.suggestions {
+            margin-top: 0;
+            padding-left: 20px;
+        }
+        ul.suggestions li {
+            margin-bottom: 8px;
+            color: #202124;
+        }
+
+        .btn { 
+            padding: 12px 25px; 
+            font-size: 1.2em; 
+            margin: 5px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 8px; 
+            background-color: #1a73e8; 
+            color: white; 
+            transition: 0.3s; 
+            font-weight: bold;
+        }
+        .btn:hover:not(:disabled) { background-color: #1557b0; transform: scale(1.02); }
+        .recording { background-color: #d93025; animation: pulse 1.5s infinite; }
+        .recording:hover { background-color: #b3140b; }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        #media-box { 
+            font-size: 1.1em; 
+            color: #444; 
+            text-align: left; 
+            background: #f8fbff; 
+            padding: 15px 30px; 
+            border-radius: 12px; 
+            line-height: 1.6; 
+            border-left: 6px solid #fbbc05; 
+            margin-top: 15px;
+            display: inline-block;
+            min-width: 70%;
+            max-width: 85%;
+        }
+        #spoken {
+            margin-top: 15px; 
+            font-size: 1.4em;
+            font-style: italic; 
+            color: #555;
+        }
+        #result {
+            font-weight: bold; 
+            font-size: 1.8em; 
+            margin-top: 5px; 
+            color: #1a73e8;
+        }
+        .nav-btns { margin-top: 20px; }
+        
+        #studentName {
+            font-size: 1.5em;
+            padding: 10px;
+            margin: 20px 0;
+            width: 80%;
+            max-width: 400px;
+            border: 2px solid #1a73e8;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feedback-note {
+            margin-top: 40px;
+            font-size: 0.95em;
+            color: #555;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+    <h1>Samtal: Munnleg æfing (151 - 160)</h1>
+    <div class="subtitle">💻🎧 Lestu spurninguna og pældu í svörunum. 🗣️ Segðu svo <b>markorðið</b> í hljóðnemann.</div>
+    
+    <div class="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div class="lang-selector">
+        <label for="languageSelect"><b>🌍 Þýðing (Orð + Spurning):</b></label>
+        <select id="languageSelect" onchange="updateUI()">
+            <option value="" selected disabled>Veldu tungumál...</option>
+            <option value="ar">Arabíska – العربية</option>
+            <option value="da">Danska – Dansk</option>
+            <option value="en">Enska – English</option>
+            <option value="tl">Filippseyska – Tagalog</option>
+            <option value="pl">Pólska – Polski</option>
+            <option value="es">Spænska – Español</option>
+            <option value="uk">Úkraínska – Українська</option>
+            <option value="vi">Víetnamska – Tiếng Việt</option>
+        </select>
+    </div>
+
+    <div id="counter"></div>
+    
+    <!-- Hér kemur stóra orðið sem á að lesa -->
+    <div id="target"></div>
+    
+    <!-- Hér kemur spurningin og tillögur -->
+    <div id="conversation-box"></div>
+    <br>
+    
+    <button id="record-btn" class="btn" onclick="toggleRecord()">🎤 Segja orðið</button>
+    
+    <div id="spoken"></div>
+    <div id="result"></div>
+
+    <div id="media-box"><i>Veldu tungumál úr listanum að ofan til að sjá þýðingu á spurningunni.</i></div>
+
+    <div class="nav-btns">
+        <button class="btn" style="background-color: #5f6368;" onclick="prevExercise()">⬅️ Fyrri</button>
+        <button class="btn" style="background-color: #5f6368;" onclick="nextExercise()">Næsta ➡️</button>
+    </div>
+
+    <div class="feedback-note">
+        Vinsamlegast sendið ábendingar á dgu@fb.is
+    </div>
+</div>
+
+<script>
+const exerciseData = [
+    { 
+        text: "þessu", 
+        html_content: `
+            <div class="question-text">❓ Hvernig finnst þér að búa á þessu landi?</div>
+            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <ul class="suggestions">
+                <li>Mér finnst mjög gott að búa á þessu landi. Það er öruggt og fallegt.</li>
+                <li>Mér finnst ágætt að búa hérna, en veðrið er stundum of kalt.</li>
+                <li>Ég er nýkomin(n) hingað, en mér líst vel á þetta land.</li>
+            </ul>
+        `,
+        translations: {
+            "en": "<b>Word:</b> þessu (this)<br><b>Question:</b> How do you like living in this country?",
+            "pl": "<b>Słowo:</b> þessu (tym)<br><b>Pytanie:</b> Jak ci się podoba życie w tym kraju?",
+            "da": "<b>Ord:</b> þessu (dette)<br><b>Spørgsmål:</b> Hvordan synes du, det er at bo i dette land?",
+            "es": "<b>Palabra:</b> þessu (este)<br><b>Pregunta:</b> ¿Qué te parece vivir en este país?",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> þessu (هذا)<br><b>السؤال:</b> كيف تجد العيش في هذا البلد؟</div>",
+            "uk": "<b>Слово:</b> þessu (цьому)<br><b>Запитання:</b> Як тобі подобається жити в цій країні?",
+            "vi": "<b>Từ:</b> þessu (này)<br><b>Câu hỏi:</b> Bạn cảm thấy thế nào khi sống ở đất nước này?",
+            "tl": "<b>Salita:</b> þessu (ito)<br><b>Tanong:</b> Kumusta ang pamumuhay mo sa bansang ito?"
+        }
+    },
+    { 
+        text: "annars", 
+        html_content: `
+            <div class="question-text">❓ Hvað segir þú annars gott í dag?</div>
+            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <ul class="suggestions">
+                <li>Ég segi bara allt gott. Takk fyrir að spyrja. En þú? 🙂</li>
+                <li>Ég er svolítið þreytt(ur) í dag, en annars er allt fínt.</li>
+                <li>Það er allt í fínu lagi hjá mér í dag.</li>
+            </ul>
+        `,
+        translations: {
+            "en": "<b>Word:</b> annars (otherwise/by the way)<br><b>Question:</b> How are you doing today, by the way?",
+            "pl": "<b>Słowo:</b> annars (poza tym / tak w ogóle)<br><b>Pytanie:</b> A tak w ogóle, jak się dzisiaj masz?",
+            "da": "<b>Ord:</b> annars (ellers)<br><b>Spørgsmål:</b> Hvordan går det ellers med dig i dag?",
+            "es": "<b>Palabra:</b> annars (por lo demás / a propósito)<br><b>Pregunta:</b> Por cierto, ¿cómo estás hoy?",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> annars (على كل حال / بالمناسبة)<br><b>السؤال:</b> بالمناسبة، كيف حالك اليوم؟</div>",
+            "uk": "<b>Слово:</b> annars (в іншому / до речі)<br><b>Запитання:</b> До речі, як твої справи сьогодні?",
+            "vi": "<b>Từ:</b> annars (nói cách khác / nhân tiện)<br><b>Câu hỏi:</b> Nhân tiện, hôm nay bạn thế nào?",
+            "tl": "<b>Salita:</b> annars (nga pala)<br><b>Tanong:</b> Nga pala, kumusta ka ngayon?"
+        }
+    },
+    { 
+        text: "hátt", 
+        html_content: `
+            <div class="question-text">❓ Talar þú stundum hátt?</div>
+            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <ul class="suggestions">
+                <li>Já, ég tala stundum hátt þegar ég þarf þess eða er spennt(ur).</li>
+                <li>Nei, ég tala yfirleitt frekar lágt.</li>
+                <li>Ég tala hátt þegar það er mikil læti í kringum mig.</li>
+            </ul>
+        `,
+        translations: {
+            "en": "<b>Word:</b> hátt (loud / highly)<br><b>Question:</b> Do you sometimes speak loudly?",
+            "pl": "<b>Słowo:</b> hátt (głośno)<br><b>Pytanie:</b> Czy czasami mówisz głośno?",
+            "da": "<b>Ord:</b> hátt (højt)<br><b>Spørgsmål:</b> Taler du nogle gange højt?",
+            "es": "<b>Palabra:</b> hátt (alto / fuerte)<br><b>Pregunta:</b> ¿A veces hablas en voz alta (fuerte)?",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> hátt (بصوت عالٍ)<br><b>السؤال:</b> هل تتحدث بصوت عالٍ أحياناً؟</div>",
+            "uk": "<b>Слово:</b> hátt (голосно)<br><b>Запитання:</b> Ти іноді говориш голосно?",
+            "vi": "<b>Từ:</b> hátt (to / lớn tiếng)<br><b>Câu hỏi:</b> Thỉnh thoảng bạn có nói to không?",
+            "tl": "<b>Salita:</b> hátt (malakas)<br><b>Tanong:</b> Nagsasalita ka ba minsan nang malakas?"
+        }
+    },
+    { 
+        text: "vegar", 
+        html_content: `
+            <div class="question-text">❓ Það er margt gott í skólanum okkar. Hvað finnst þér hins vegar vanta?</div>
+            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <ul class="suggestions">
+                <li>Mér finnst hins vegar vanta betri mat í mötuneytið.</li>
+                <li>Mér finnst hins vegar vanta fleiri þægilega stóla í stofurnar.</li>
+                <li>Mér finnst vanta fleiri skemmtilega viðburði í skólanum.</li>
+            </ul>
+        `,
+        translations: {
+            "en": "<b>Word:</b> vegar (way/side - used in 'hins vegar' = however)<br><b>Question:</b> There are many good things in our school. What do you think is missing, however?",
+            "pl": "<b>Słowo:</b> vegar (używane w 'hins vegar' = jednakże)<br><b>Pytanie:</b> W naszej szkole jest wiele dobrych rzeczy. Czego jednak uważasz, że brakuje?",
+            "da": "<b>Ord:</b> vegar (brugt i 'hins vegar' = imidlertid)<br><b>Spørgsmål:</b> Der er mange gode ting på vores skole. Hvad synes du imidlertid der mangler?",
+            "es": "<b>Palabra:</b> vegar (usado en 'hins vegar' = sin embargo)<br><b>Pregunta:</b> Hay muchas cosas buenas en nuestra escuela. Sin embargo, ¿qué crees que falta?",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> vegar (تستخدم في 'hins vegar' بمعنى ومع ذلك)<br><b>السؤال:</b> هناك أشياء كثيرة جيدة في مدرستنا. ومع ذلك، ما الذي تعتقد أنه مفقود؟</div>",
+            "uk": "<b>Слово:</b> vegar (використовується в 'hins vegar' = проте/однак)<br><b>Запитання:</b> У нашій школі багато хорошого. Однак чого, на твою думку, бракує?",
+            "vi": "<b>Từ:</b> vegar (được dùng trong 'hins vegar' = tuy nhiên)<br><b>Câu hỏi:</b> Có nhiều điều tốt ở trường chúng ta. Tuy nhiên, bạn nghĩ còn thiếu điều gì?",
+            "tl": "<b>Salita:</b> vegar (ginagamit sa 'hins vegar' = gayunpaman)<br><b>Tanong:</b> Maraming magagandang bagay sa ating paaralan. Gayunpaman, ano sa tingin mo ang kulang?"
+        }
+    },
+    { 
+        text: "finnst", 
+        html_content: `
+            <div class="question-text">❓ Hvað finnst þér skemmtilegast að gera eftir skóla?</div>
+            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <ul class="suggestions">
+                <li>Mér finnst skemmtilegast að fara á æfingu og hitta vini.</li>
+                <li>Mér finnst mjög gaman að spila tölvuleiki heima.</li>
+                <li>Eftir skóla finnst mér best að slaka á og horfa á sjónvarpið.</li>
+            </ul>
+        `,
+        translations: {
+            "en": "<b>Word:</b> finnst (find / think / feel)<br><b>Question:</b> What do you find most fun to do after school?",
+            "pl": "<b>Słowo:</b> finnst (uważam/sądzę)<br><b>Pytanie:</b> Co sprawia ci największą przyjemność po szkole?",
+            "da": "<b>Ord:</b> finnst (synes)<br><b>Spørgsmål:</b> Hvad synes du er sjovest at lave efter skole?",
+            "es": "<b>Palabra:</b> finnst (parece / piensa)<br><b>Pregunta:</b> ¿Qué te parece más divertido hacer después de la escuela?",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> finnst (يجد / يعتقد)<br><b>السؤال:</b> ما هو أكثر شيء تجد متعة في القيام به بعد المدرسة؟</div>",
+            "uk": "<b>Слово:</b> finnst (здається / вважаю)<br><b>Запитання:</b> Що тобі найбільше подобається робити після школи?",
+            "vi": "<b>Từ:</b> finnst (cảm thấy / nghĩ)<br><b>Câu hỏi:</b> Bạn thấy điều gì thú vị nhất để làm sau giờ học?",
+            "tl": "<b>Salita:</b> finnst (pakiramdam / sa tingin)<br><b>Tanong:</b> Ano ang pinakamasayang gawin para sa iyo pagkatapos ng klase?"
+        }
+    },
+    { 
+        text: "mig", 
+        html_content: `
+            <div class="question-text">❓ Getur þú skilið mig vel þegar ég tala íslensku?</div>
+            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <ul class="suggestions">
+                <li>Já, ég get skilið þig mjög vel þegar þú talar skýrt.</li>
+                <li>Ég skil þig stundum, en stundum talar fólk of hratt.</li>
+                <li>Nei, ekki alveg. Ég er enn að læra íslensku.</li>
+            </ul>
+        `,
+        translations: {
+            "en": "<b>Word:</b> mig (me)<br><b>Question:</b> Can you understand me well when I speak Icelandic?",
+            "pl": "<b>Słowo:</b> mig (mnie)<br><b>Pytanie:</b> Czy dobrze mnie rozumiesz, kiedy mówię po islandzku?",
+            "da": "<b>Ord:</b> mig (mig)<br><b>Spørgsmål:</b> Kan du forstå mig godt, når jeg taler islandsk?",
+            "es": "<b>Palabra:</b> mig (me / a mí)<br><b>Pregunta:</b> ¿Me puedes entender bien cuando hablo islandés?",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> mig (ني/أنا)<br><b>السؤال:</b> هل تستطيع فهمي جيداً عندما أتحدث الآيسلندية؟</div>",
+            "uk": "<b>Слово:</b> mig (мене)<br><b>Запитання:</b> Ти добре мене розумієш, коли я розмовляю ісландською?",
+            "vi": "<b>Từ:</b> mig (tôi)<br><b>Câu hỏi:</b> Bạn có thể hiểu tôi rõ khi tôi nói tiếng Iceland không?",
+            "tl": "<b>Salita:</b> mig (ako)<br><b>Tanong:</b> Naiintindihan mo ba ako nang mabuti kapag nagsasalita ako ng Icelandic?"
+        }
+    },
+    { 
+        text: "ekkert", 
+        html_content: `
+            <div class="question-text">❓ Hvaða orð er andheiti orðsins ekkert?</div>
+            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <ul class="suggestions">
+                <li>Ég held að andheiti orðsins ekkert sé „allt“.</li>
+                <li>Andheitið við ekkert er orðið „eitthvað“.</li>
+                <li>Orðið „allt“ eða „eitthvað“ er andheitið við ekkert.</li>
+            </ul>
+        `,
+        translations: {
+            "en": "<b>Word:</b> ekkert (nothing)<br><b>Question:</b> What word is the antonym of the word 'nothing'?",
+            "pl": "<b>Słowo:</b> ekkert (nic)<br><b>Pytanie:</b> Jakie słowo jest przeciwieństwem słowa 'nic'?",
+            "da": "<b>Ord:</b> ekkert (ingenting)<br><b>Spørgsmål:</b> Hvilket ord er antonymet (modsætningen) til ordet 'ingenting'?",
+            "es": "<b>Palabra:</b> ekkert (nada)<br><b>Pregunta:</b> ¿Qué palabra es el antónimo de la palabra 'nada'?",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> ekkert (لا شيء)<br><b>السؤال:</b> ما هي الكلمة المضادة لكلمة 'لا شيء'؟</div>",
+            "uk": "<b>Слово:</b> ekkert (нічого)<br><b>Запитання:</b> Яке слово є антонімом до слова 'нічого'?",
+            "vi": "<b>Từ:</b> ekkert (không có gì)<br><b>Câu hỏi:</b> Từ nào là từ trái nghĩa của từ 'không có gì'?",
+            "tl": "<b>Salita:</b> ekkert (wala)<br><b>Tanong:</b> Anong salita ang kasalungat ng salitang 'wala'?"
+        }
+    },
+    { 
+        text: "hefði", 
+        html_content: `
+            <div class="question-text">❓ Hvort hefði verið betra að mæta snemma eða seint í skólann í morgun?</div>
+            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <ul class="suggestions">
+                <li>Það hefði verið betra að mæta snemma til að læra meira.</li>
+                <li>Ég var þreytt(ur), svo það hefði verið gott að sofa lengur!</li>
+                <li>Það er alltaf betra að mæta á réttum tíma í skólann.</li>
+            </ul>
+        `,
+        translations: {
+            "en": "<b>Word:</b> hefði (would have / had)<br><b>Question:</b> Would it have been better to arrive early or late to school this morning?",
+            "pl": "<b>Słowo:</b> hefði (byłby / miałby)<br><b>Pytanie:</b> Czy byłoby lepiej przyjść wcześnie czy późno do szkoły dzisiejszego ranka?",
+            "da": "<b>Ord:</b> hefði (ville have / havde)<br><b>Spørgsmål:</b> Ville det have været bedre at møde tidligt eller sent i skole i morges?",
+            "es": "<b>Palabra:</b> hefði (habría / hubiera)<br><b>Pregunta:</b> ¿Habría sido mejor llegar temprano o tarde a la escuela esta mañana?",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> hefði (كان سيكون)<br><b>السؤال:</b> هل كان من الأفضل الوصول مبكراً أم متأخراً إلى المدرسة هذا الصباح؟</div>",
+            "uk": "<b>Слово:</b> hefði (було б / мав би)<br><b>Запитання:</b> Чи було б краще прийти рано чи пізно до школи сьогодні вранці?",
+            "vi": "<b>Từ:</b> hefði (sẽ có / đã có)<br><b>Câu hỏi:</b> Sáng nay đến trường sớm hay muộn thì tốt hơn?",
+            "tl": "<b>Salita:</b> hefði (sana / sana ay)<br><b>Tanong:</b> Mas mabuti kaya sana kung dumating nang maaga o huli sa paaralan ngayong umaga?"
+        }
+    },
+    { 
+        text: "sinn", 
+        html_content: `
+            <div class="question-text">❓ Hvar á nemandi helst að geyma símann sinn þegar hann er í kennslustund?</div>
+            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <ul class="suggestions">
+                <li>Nemandi á að geyma símann sinn niðri í töskunni.</li>
+                <li>Það er best að hafa símann í vasanum og á hljóðlausu.</li>
+                <li>Síminn á að vera í símahótelinu eða í töskunni.</li>
+            </ul>
+        `,
+        translations: {
+            "en": "<b>Word:</b> sinn (his/her/their own)<br><b>Question:</b> Where should a student ideally keep their phone during class?",
+            "pl": "<b>Słowo:</b> sinn (swój)<br><b>Pytanie:</b> Gdzie uczeń powinien najlepiej trzymać swój telefon podczas lekcji?",
+            "da": "<b>Ord:</b> sinn (sin/sit)<br><b>Spørgsmål:</b> Hvor bør en elev helst opbevare sin telefon, når han/hun er i time?",
+            "es": "<b>Palabra:</b> sinn (su / su propio)<br><b>Pregunta:</b> ¿Dónde debería idealmente un estudiante guardar su teléfono durante la clase?",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> sinn (الخاص به/بها)<br><b>السؤال:</b> أين يجب على الطالب أن يحتفظ بهاتفه أثناء الحصة؟</div>",
+            "uk": "<b>Слово:</b> sinn (свій)<br><b>Запитання:</b> Де учню найкраще зберігати свій телефон під час уроку?",
+            "vi": "<b>Từ:</b> sinn (của anh ấy/cô ấy/của mình)<br><b>Câu hỏi:</b> Học sinh nên cất điện thoại ở đâu trong giờ học?",
+            "tl": "<b>Salita:</b> sinn (kanyang sarili)<br><b>Tanong:</b> Saan pinakamabuting itago ng estudyante ang kanyang telepono habang may klase?"
+        }
+    },
+    { 
+        text: "mynd", 
+        html_content: `
+            <div class="question-text">❓ Tekur þú stundum mynd með símanum þínum í skólanum?</div>
+            <div class="suggestion-title">💡 Tillögur að svörum:</div>
+            <ul class="suggestions">
+                <li>Já, ég tek stundum mynd af töflunni til að muna glósurnar.</li>
+                <li>Já, ég tek oft myndir af vinum mínum í frímínútum.</li>
+                <li>Nei, ég nota símann minn mjög sjaldan í skólanum.</li>
+            </ul>
+        `,
+        translations: {
+            "en": "<b>Word:</b> mynd (picture/photo)<br><b>Question:</b> Do you sometimes take a picture with your phone at school?",
+            "pl": "<b>Słowo:</b> mynd (zdjęcie/obraz)<br><b>Pytanie:</b> Czy czasami robisz zdjęcie telefonem w szkole?",
+            "da": "<b>Ord:</b> mynd (billede)<br><b>Spørgsmål:</b> Tager du nogle gange et billede med din telefon i skolen?",
+            "es": "<b>Palabra:</b> mynd (foto/imagen)<br><b>Pregunta:</b> ¿A veces tomas una foto con tu teléfono en la escuela?",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> mynd (صورة)<br><b>السؤال:</b> هل تلتقط أحياناً صورة بهاتفك في المدرسة؟</div>",
+            "uk": "<b>Слово:</b> mynd (картинка/фото)<br><b>Запитання:</b> Ти іноді робиш фото на свій телефон у школі?",
+            "vi": "<b>Từ:</b> mynd (bức ảnh)<br><b>Câu hỏi:</b> Bạn có thỉnh thoảng chụp ảnh bằng điện thoại ở trường không?",
+            "tl": "<b>Salita:</b> mynd (larawan/litrato)<br><b>Tanong:</b> Kumukuha ka ba minsan ng litrato gamit ang iyong telepono sa paaralan?"
+        }
+    }
+];
+
+let userScores = new Array(exerciseData.length).fill(null);
+let userSpoken = new Array(exerciseData.length).fill("");
+
+let currentIndex = 0;
+let recognition;
+let isRecording = false;
+let autoAdvanceTimer = null;
+let hasDownloadedCert = false;
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (SpeechRecognition) {
+    recognition = new SpeechRecognition();
+    recognition.lang = 'is-IS';
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    
+    recognition.onend = () => {
+        isRecording = false;
+        const btn = document.getElementById('record-btn');
+        if (btn) {
+            btn.innerText = "🎤 Segja orðið";
+            btn.classList.remove('recording');
+        }
+        
+        const resDiv = document.getElementById('result');
+        if (resDiv && resDiv.innerText === "Hlusta...") {
+            resDiv.innerText = "";
+        }
+    };
+} else {
+    alert("Þessi vafri styður ekki talgreiningu. Notaðu Chrome eða Edge á tölvu.");
+}
+
+window.onload = () => { 
+    updateUI(); 
+};
+
+function updateProgress() {
+    let correctCount = 0;
+    for (let i = 0; i < userScores.length; i++) {
+        if (userScores[i] === 100) {
+            correctCount++;
+        }
+    }
+    const percent = (correctCount / exerciseData.length) * 100;
+    
+    const progressBar = document.getElementById('progress-bar');
+    if(progressBar) {
+        progressBar.style.width = percent + '%';
+    }
+    return correctCount;
+}
+
+function findNextUnfinished() {
+    for (let i = 0; i < userScores.length; i++) {
+        if (userScores[i] !== 100) {
+            currentIndex = i;
+            break;
+        }
+    }
+    
+    document.getElementById('app').innerHTML = `
+        <h1>Samtal: Munnleg æfing (151 - 160)</h1>
+        <div class="subtitle">💻🎧 Lestu spurninguna og pældu í svörunum. 🗣️ Segðu svo <b>markorðið</b> í hljóðnemann.</div>
+        <div class="progress-container"><div id="progress-bar"></div></div>
+        
+        <div class="lang-selector">
+            <label for="languageSelect"><b>🌍 Þýðing (Orð + Spurning):</b></label>
+            <select id="languageSelect" onchange="updateUI()">
+                <option value="" selected disabled>Veldu tungumál...</option>
+                <option value="ar">Arabíska – العربية</option>
+                <option value="da">Danska – Dansk</option>
+                <option value="en">Enska – English</option>
+                <option value="tl">Filippseyska – Tagalog</option>
+                <option value="pl">Pólska – Polski</option>
+                <option value="es">Spænska – Español</option>
+                <option value="uk">Úkraínska – Українська</option>
+                <option value="vi">Víetnamska – Tiếng Việt</option>
+            </select>
+        </div>
+
+        <div id="counter"></div>
+        <div id="target"></div>
+        <div id="conversation-box"></div>
+        <br>
+        <button id="record-btn" class="btn" onclick="toggleRecord()">🎤 Segja orðið</button>
+        <div id="spoken"></div>
+        <div id="result"></div>
+        <div id="media-box"></div>
+        <div class="nav-btns">
+            <button class="btn" style="background-color: #5f6368;" onclick="prevExercise()">⬅️ Fyrri</button>
+            <button class="btn" style="background-color: #5f6368;" onclick="nextExercise()">Næsta ➡️</button>
+        </div>
+        <div class="feedback-note">
+            Vinsamlegast sendið ábendingar á dgu@fb.is
+        </div>
+    `;
+    updateUI();
+}
+
+function updateUI() {
+    clearTimeout(autoAdvanceTimer); 
+    const correctCount = updateProgress();
+
+    if (currentIndex >= exerciseData.length) {
+        if (correctCount === exerciseData.length) {
+            document.getElementById('app').innerHTML = `
+                <div class="progress-container"><div id="progress-bar" style="width: 100%;"></div></div>
+                <h1 style="color: #34a853; font-size: 2.5em;">Frábært! Þú náðir 100% árangri! 🎉</h1>
+                <p style="font-size: 1.2em; color: #555;">Skrifaðu nafnið þitt hér að neðan til að sækja viðurkenningarskjalið þitt.</p>
+                <input type="text" id="studentName" placeholder="Skrifaðu nafnið þitt hér" autocomplete="off" ${hasDownloadedCert ? 'disabled' : ''}><br>
+                <button id="cert-btn" class="btn" style="background-color: ${hasDownloadedCert ? '#5f6368' : '#1a73e8'}; font-size: 1.5em; padding: 15px 30px; margin-top: 10px; cursor: ${hasDownloadedCert ? 'not-allowed' : 'pointer'}; opacity: ${hasDownloadedCert ? '0.7' : '1'};" onclick="downloadCert()" ${hasDownloadedCert ? 'disabled' : ''}>
+                    ${hasDownloadedCert ? '✅ Skjal sótt' : '🏆 Sækja viðurkenningarskjal'}
+                </button>
+                <br><br>
+                <button class="btn" style="background-color: #5f6368;" onclick="location.reload()">🔄 Byrja nýja umferð</button>
+                <div class="feedback-note">
+                    Vinsamlegast sendið ábendingar á dgu@fb.is
+                </div>
+            `;
+        } else {
+            document.getElementById('app').innerHTML = `
+                <div class="progress-container"><div id="progress-bar" style="width: ${(correctCount/exerciseData.length)*100}%;"></div></div>
+                <h1 style="color: #fbbc05; font-size: 2em;">Þú ert næstum því búin(n)!</h1>
+                <p style="font-size: 1.2em;">Þú hefur klárað ${correctCount} af${exerciseData.length} orðum með 100% árangri.</p>
+                <p style="font-size: 1.1em; color: #555;">Farðu til baka og reyndu aftur við þau orð sem vantaði upp á til að fá skjalið.</p>
+                <button class="btn" style="background-color: #fbbc05; color: #000;" onclick="findNextUnfinished()">➡️ Fara á orð sem vantar</button>
+                <div class="feedback-note">
+                    Vinsamlegast sendið ábendingar á dgu@fb.is
+                </div>
+            `;
+        }
+        return;
+    }
+
+    const curr = exerciseData[currentIndex];
+    
+    const langSelect = document.getElementById('languageSelect');
+    const selectedLang = langSelect ? langSelect.value : '';
+
+    document.getElementById('target').innerHTML = curr.text;
+    document.getElementById('conversation-box').innerHTML = curr.html_content;
+    document.getElementById('counter').innerText = `Spurning ${currentIndex + 1} af${exerciseData.length}`;
+    
+    if (!selectedLang) {
+        document.getElementById('media-box').innerHTML = "<i>Veldu tungumál úr listanum að ofan til að sjá þýðingu á spurningunni.</i>";
+    } else {
+        document.getElementById('media-box').innerHTML = curr.translations[selectedLang] || (curr.translations['en'] + "<br><br><i>(Ath: Þýðingu á þessu tungumáli vantar, sýni ensku)</i>");
+    }
+
+    const savedScore = userScores[currentIndex];
+    const savedText = userSpoken[currentIndex];
+
+    if (savedScore !== null) {
+        document.getElementById('result').innerText = `Einkunn: ${savedScore}%`;
+        document.getElementById('spoken').innerText = `Þú sagðir: "${savedText}"`;
+    } else {
+        document.getElementById('result').innerText = "";
+        document.getElementById('spoken').innerText = "";
+    }
+}
+
+function nextExercise() {
+    currentIndex++;
+    updateUI();
+}
+
+function prevExercise() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        updateUI();
+    }
+}
+
+function toggleRecord() {
+    if (!recognition) return;
+
+    const btn = document.getElementById('record-btn');
+    if (isRecording) {
+        recognition.stop();
+    } else {
+        try {
+            recognition.start();
+            isRecording = true;
+            btn.innerText = "🛑 Hlusta...";
+            btn.classList.add('recording');
+            document.getElementById('result').innerText = "Hlusta...";
+            document.getElementById('spoken').innerText = "";
+        } catch(e) {
+            console.log("Villa í upptöku: " + e);
+        }
+    }
+}
+
+if (recognition) {
+    recognition.onresult = (event) => {
+        let spoken = event.results[0][0].transcript;
+        spoken = spoken.trim().toLowerCase(); 
+
+        document.getElementById('spoken').innerText = `Þú sagðir: "${spoken}"`;
+        
+        const targetWord = exerciseData[currentIndex].text.toLowerCase();
+        
+        let score = (spoken === targetWord) ? 100 : 0;
+        
+        if (spoken.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"").trim() === targetWord) {
+            score = 100;
+        }
+        
+        document.getElementById('result').innerText = `Einkunn: ${score}%`;
+
+        userScores[currentIndex] = score;
+        userSpoken[currentIndex] = spoken;
+        
+        updateProgress();
+
+        if (score === 100) {
+            autoAdvanceTimer = setTimeout(() => {
+                nextExercise();
+            }, 1000); 
+        }
+    };
+}
+
+function downloadCert() {
+    if (hasDownloadedCert) return; 
+
+    const studentNameInput = document.getElementById('studentName');
+    const studentName = studentNameInput ? studentNameInput.value.trim() : "";
+    
+    if (studentName === "") {
+        alert("Vinsamlegast skrifaðu nafnið þitt fyrst!");
+        return;
+    }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 900;
+    canvas.height = 600;
+    const ctx = canvas.getContext('2d');
+    
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.strokeStyle = '#1a73e8';
+    ctx.lineWidth = 15;
+    ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+    ctx.strokeStyle = '#fbbc05';
+    ctx.lineWidth = 5;
+    ctx.strokeRect(40, 40, canvas.width - 80, canvas.height - 80);
+    
+    ctx.fillStyle = '#1a73e8';
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 50px Arial';
+    ctx.fillText('Viðurkenning', canvas.width / 2, 140);
+    
+    ctx.fillStyle = '#333333';
+    ctx.font = '24px Arial';
+    ctx.fillText('Þetta skjal staðfestir að', canvas.width / 2, 220);
+    
+    ctx.fillStyle = '#000000';
+    ctx.font = 'bold 45px Arial';
+    ctx.fillText(studentName, canvas.width / 2, 290);
+    
+    ctx.fillStyle = '#333333';
+    ctx.font = '24px Arial';
+    ctx.fillText('hefur lokið munnlegu samtaisæfingunni:', canvas.width / 2, 360);
+
+    ctx.fillStyle = '#1a73e8';
+    ctx.font = 'bold 26px Arial';
+    ctx.fillText('Samtal og Markorð: 151 - 160 algengustu orðin', canvas.width / 2, 420);
+    
+    ctx.fillStyle = '#34a853';
+    ctx.font = 'italic 28px Arial';
+    ctx.fillText('Frábær árangur! Haltu áfram að æfa þig.', canvas.width / 2, 490);
+
+    const dateString = new Date().toLocaleDateString('is-IS');
+    ctx.fillStyle = '#666666';
+    ctx.font = '18px Arial';
+    ctx.fillText('Dagsetning: ' + dateString, canvas.width / 2, 540);
+    
+    const link = document.createElement('a');
+    link.download = `Vidurkenning_${studentName.replace(/\s+/g, '_')}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    
+    hasDownloadedCert = true;
+    const btn = document.getElementById('cert-btn');
+    if (btn) {
+        btn.disabled = true;
+        btn.innerText = "✅ Skjal sótt";
+        btn.style.backgroundColor = "#5f6368";
+        btn.style.cursor = "not-allowed";
+        btn.style.opacity = "0.7";
+    }
+    if (studentNameInput) {
+        studentNameInput.disabled = true;
+    }
+}
+</script>
+
+</body>
+</html>
