@@ -101,9 +101,12 @@
         }
         .question-text {
             font-size: 1.3em;
-            font-weight: bold;
             color: #1a73e8;
             margin-bottom: 15px;
+        }
+        .question-text u {
+            text-decoration-thickness: 3px;
+            text-underline-offset: 3px;
         }
         .suggestion-title {
             font-weight: bold;
@@ -203,15 +206,35 @@
     </div>
 
     <div class="lang-selector">
-        <label for="languageSelect"><b>🌍 Þýðing (Orð + Spurning):</b></label>
+        <label for="languageSelect"><b>🌍 Þýðing (Orð, spurning & tillögur):</b></label>
         <select id="languageSelect" onchange="updateUI()">
             <option value="" selected disabled>Veldu tungumál...</option>
             <option value="ar">Arabíska – العربية</option>
+            <option value="be">Belgíska (Flæmska) – Vlaams</option>
             <option value="da">Danska – Dansk</option>
             <option value="en">Enska – English</option>
             <option value="tl">Filippseyska – Tagalog</option>
+            <option value="fi">Finnska – Suomi</option>
+            <option value="fr">Franska – Français</option>
+            <option value="fo">Færeyska – Føroyskt</option>
+            <option value="kl">Grænlenska – Kalaallisut</option>
+            <option value="nl">Hollenska – Nederlands</option>
+            <option value="it">Ítalska – Italiano</option>
+            <option value="ja">Japanska – 日本語</option>
+            <option value="zh">Kínverska – 中文</option>
+            <option value="ku">Kúrdíska – Kurdî</option>
+            <option value="lv">Lettneska – Latviešu</option>
+            <option value="lt">Litháíska – Lietuvių</option>
+            <option value="no">Norska – Norsk</option>
+            <option value="fa">Persneska – فارسی</option>
+            <option value="pt">Portúgalska – Português</option>
             <option value="pl">Pólska – Polski</option>
+            <option value="ro">Rúmenska – Română</option>
+            <option value="ru">Rússneska – Русский</option>
             <option value="es">Spænska – Español</option>
+            <option value="sv">Sænska – Svenska</option>
+            <option value="th">Tælenska – ภาษาไทย</option>
+            <option value="de">Þýska – Deutsch</option>
             <option value="uk">Úkraínska – Українська</option>
             <option value="vi">Víetnamska – Tiếng Việt</option>
         </select>
@@ -231,7 +254,7 @@
     <div id="spoken"></div>
     <div id="result"></div>
 
-    <div id="media-box"><i>Veldu tungumál úr listanum að ofan til að sjá þýðingu á spurningunni.</i></div>
+    <div id="media-box"><i>Veldu tungumál úr listanum að ofan til að sjá þýðingu á spurningunni og svörunum.</i></div>
 
     <div class="nav-btns">
         <button class="btn" style="background-color: #5f6368;" onclick="prevExercise()">⬅️ Fyrri</button>
@@ -248,7 +271,7 @@ const exerciseData = [
     { 
         text: "þessu", 
         html_content: `
-            <div class="question-text">❓ Hvernig finnst þér að búa á þessu landi?</div>
+            <div class="question-text">❓ Hvernig finnst þér að búa á <u><b>þessu</b></u> landi?</div>
             <div class="suggestion-title">💡 Tillögur að svörum:</div>
             <ul class="suggestions">
                 <li>Mér finnst mjög gott að búa á þessu landi. Það er öruggt og fallegt.</li>
@@ -257,20 +280,21 @@ const exerciseData = [
             </ul>
         `,
         translations: {
-            "en": "<b>Word:</b> þessu (this)<br><b>Question:</b> How do you like living in this country?",
-            "pl": "<b>Słowo:</b> þessu (tym)<br><b>Pytanie:</b> Jak ci się podoba życie w tym kraju?",
-            "da": "<b>Ord:</b> þessu (dette)<br><b>Spørgsmål:</b> Hvordan synes du, det er at bo i dette land?",
-            "es": "<b>Palabra:</b> þessu (este)<br><b>Pregunta:</b> ¿Qué te parece vivir en este país?",
-            "ar": "<div dir='rtl'><b>الكلمة:</b> þessu (هذا)<br><b>السؤال:</b> كيف تجد العيش في هذا البلد؟</div>",
-            "uk": "<b>Слово:</b> þessu (цьому)<br><b>Запитання:</b> Як тобі подобається жити в цій країні?",
-            "vi": "<b>Từ:</b> þessu (này)<br><b>Câu hỏi:</b> Bạn cảm thấy thế nào khi sống ở đất nước này?",
-            "tl": "<b>Salita:</b> þessu (ito)<br><b>Tanong:</b> Kumusta ang pamumuhay mo sa bansang ito?"
+            "en": "<b>Word:</b> þessu (this)<br><b>Question:</b> How do you like living in <u><b>this</b></u> country?<br><br><b>Suggestions:</b><br>• I like living in this country very much. It is safe and beautiful.<br>• I think it's okay to live here, but the weather is sometimes too cold.<br>• I just arrived here, but I like this country.",
+            "pl": "<b>Słowo:</b> þessu (tym)<br><b>Pytanie:</b> Jak ci się podoba życie w <u><b>tym</b></u> kraju?<br><br><b>Sugestie:</b><br>• Bardzo lubię mieszkać w tym kraju. Jest bezpiecznie i pięknie.<br>• Uważam, że dobrze się tu mieszka, ale pogoda bywa zbyt zimna.<br>• Dopiero tu przyjechałem/am, ale podoba mi się ten kraj.",
+            "da": "<b>Ord:</b> þessu (dette)<br><b>Spørgsmål:</b> Hvordan synes du, det er at bo i <u><b>dette</b></u> land?<br><br><b>Forslag:</b><br>• Jeg kan rigtig godt lide at bo i dette land. Det er trygt og smukt.<br>• Jeg synes det er fint at bo her, men vejret er nogle gange for koldt.<br>• Jeg er lige ankommet, men jeg kan godt lide dette land.",
+            "es": "<b>Palabra:</b> þessu (este)<br><b>Pregunta:</b> ¿Qué te parece vivir en <u><b>este</b></u> país?<br><br><b>Sugerencias:</b><br>• Me gusta mucho vivir en este país. Es seguro y hermoso.<br>• Me parece bien vivir aquí, pero a veces el clima es demasiado frío.<br>• Acabo de llegar aquí, pero me gusta este país.",
+            "uk": "<b>Слово:</b> þessu (цій)<br><b>Запитання:</b> Як тобі подобається жити в <u><b>цій</b></u> країні?<br><br><b>Пропозиції:</b><br>• Мені дуже подобається жити в цій країні. Тут безпечно і красиво.<br>• Мені здається, тут непогано жити, але погода іноді занадто холодна.<br>• Я щойно приїхав(ла) сюди, але мені подобається ця країна.",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> þessu (هذا)<br><b>السؤال:</b> كيف تجد العيش في <u><b>هذا</b></u> البلد؟<br><br><b>اقتراحات:</b><br>• يعجبني العيش في هذا البلد كثيراً. إنه آمن وجميل.<br>• أعتقد أنه من الجيد العيش هنا، لكن الطقس يكون بارداً جداً أحياناً.<br>• لقد وصلت للتو إلى هنا، ولكن يعجبني هذا البلد.</div>",
+            "tl": "<b>Salita:</b> þessu (ito)<br><b>Tanong:</b> Kumusta ang pamumuhay mo sa bansang <u><b>ito</b></u>?<br><br><b>Mungkahi:</b><br>• Gustong-gusto kong manirahan sa bansang ito. Ito ay ligtas at maganda.<br>• Ayos lang manirahan dito, pero minsan ay masyadong malamig ang panahon.<br>• Kadarating ko lang dito, pero gusto ko ang bansang ito.",
+            "vi": "<b>Từ:</b> þessu (này)<br><b>Câu hỏi:</b> Bạn cảm thấy thế nào khi sống ở đất nước <u><b>này</b></u>?<br><br><b>Gợi ý:</b><br>• Tôi rất thích sống ở đất nước này. Nơi đây an toàn và xinh đẹp.<br>• Tôi nghĩ sống ở đây cũng ổn, nhưng đôi khi thời tiết quá lạnh.<br>• Tôi mới đến đây, nhưng tôi thích đất nước này.",
+            "lt": "<b>Žodis:</b> þessu (šioje)<br><b>Klausimas:</b> Kaip tau patinka gyventi <u><b>šioje</b></u> šalyje?<br><br><b>Pasiūlymai:</b><br>• Man labai patinka gyventi šioje šalyje. Čia saugu ir gražu.<br>• Manau, kad čia gyventi neblogai, bet oras kartais per šaltas.<br>• Aš ką tik atvykau, bet man patinka ši šalis."
         }
     },
     { 
         text: "annars", 
         html_content: `
-            <div class="question-text">❓ Hvað segir þú annars gott í dag?</div>
+            <div class="question-text">❓ Hvað segir þú <u><b>annars</b></u> gott í dag?</div>
             <div class="suggestion-title">💡 Tillögur að svörum:</div>
             <ul class="suggestions">
                 <li>Ég segi bara allt gott. Takk fyrir að spyrja. En þú? 🙂</li>
@@ -279,20 +303,20 @@ const exerciseData = [
             </ul>
         `,
         translations: {
-            "en": "<b>Word:</b> annars (otherwise/by the way)<br><b>Question:</b> How are you doing today, by the way?",
-            "pl": "<b>Słowo:</b> annars (poza tym / tak w ogóle)<br><b>Pytanie:</b> A tak w ogóle, jak się dzisiaj masz?",
-            "da": "<b>Ord:</b> annars (ellers)<br><b>Spørgsmål:</b> Hvordan går det ellers med dig i dag?",
-            "es": "<b>Palabra:</b> annars (por lo demás / a propósito)<br><b>Pregunta:</b> Por cierto, ¿cómo estás hoy?",
-            "ar": "<div dir='rtl'><b>الكلمة:</b> annars (على كل حال / بالمناسبة)<br><b>السؤال:</b> بالمناسبة، كيف حالك اليوم؟</div>",
-            "uk": "<b>Слово:</b> annars (в іншому / до речі)<br><b>Запитання:</b> До речі, як твої справи сьогодні?",
-            "vi": "<b>Từ:</b> annars (nói cách khác / nhân tiện)<br><b>Câu hỏi:</b> Nhân tiện, hôm nay bạn thế nào?",
-            "tl": "<b>Salita:</b> annars (nga pala)<br><b>Tanong:</b> Nga pala, kumusta ka ngayon?"
+            "en": "<b>Word:</b> annars (otherwise/by the way)<br><b>Question:</b> How are you doing today, <u><b>by the way</b></u>?<br><br><b>Suggestions:</b><br>• I'm doing very well. Thanks for asking. And you?<br>• I'm a little tired today, but otherwise everything is fine.<br>• Everything is perfectly fine with me today.",
+            "pl": "<b>Słowo:</b> annars (poza tym / tak w ogóle)<br><b>Pytanie:</b> A <u><b>tak w ogóle</b></u>, jak się dzisiaj masz?<br><br><b>Sugestie:</b><br>• Wszystko u mnie dobrze. Dziękuję za pytanie. A u ciebie?<br>• Jestem dzisiaj trochę zmęczony/a, ale poza tym wszystko jest w porządku.<br>• Dzisiaj u mnie wszystko jest w porządku.",
+            "da": "<b>Ord:</b> annars (ellers)<br><b>Spørgsmål:</b> Hvordan går det <u><b>ellers</b></u> med dig i dag?<br><br><b>Forslag:</b><br>• Det går bare godt. Tak fordi du spørger. Og dig?<br>• Jeg er lidt træt i dag, men ellers er alt fint.<br>• Alt er helt i orden med mig i dag.",
+            "es": "<b>Palabra:</b> annars (por lo demás / a propósito)<br><b>Pregunta:</b> <u><b>Por cierto</b></u>, ¿cómo estás hoy?<br><br><b>Sugerencias:</b><br>• Estoy muy bien. Gracias por preguntar. ¿Y tú?<br>• Estoy un poco cansado/a hoy, pero por lo demás todo está bien.<br>• Todo está perfectamente bien conmigo hoy.",
+            "uk": "<b>Слово:</b> annars (до речі/в іншому)<br><b>Запитання:</b> <u><b>До речі</b></u>, як твої справи сьогодні?<br><br><b>Пропозиції:</b><br>• У мене все дуже добре. Дякую, що запитали. А у вас?<br>• Я трохи втомився/лася сьогодні, але в іншому все гаразд.<br>• Сьогодні у мене все абсолютно нормально.",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> annars (على كل حال / بالمناسبة)<br><b>السؤال:</b> <u><b>بالمناسبة</b></u>، كيف حالك اليوم؟<br><br><b>اقتراحات:</b><br>• أنا بخير. شكرا على السؤال. وأنت؟<br>• أنا متعب قليلاً اليوم، لكن بخلاف ذلك كل شيء على ما يرام.<br>• كل شيء على ما يرام معي اليوم.</div>",
+            "tl": "<b>Salita:</b> annars (nga pala / kung hindi man)<br><b>Tanong:</b> <u><b>Nga pala</b></u>, kumusta ka ngayon?<br><br><b>Mungkahi:</b><br>• Mabuti naman ako. Salamat sa pagtatanong. Ikaw?<br>• Medyo pagod ako ngayon, pero okay naman ang lahat.<br>• Maayos naman ang lahat sa akin ngayon.",
+            "vi": "<b>Từ:</b> annars (nhân tiện / mặt khác)<br><b>Câu hỏi:</b> <u><b>Nhân tiện</b></u>, hôm nay bạn thế nào?<br><br><b>Gợi ý:</b><br>• Tôi rất khỏe. Cảm ơn bạn đã hỏi. Còn bạn thì sao?<br>• Hôm nay tôi hơi mệt, nhưng mặt khác thì mọi thứ đều ổn.<br>• Hôm nay mọi thứ với tôi đều hoàn toàn ổn."
         }
     },
     { 
         text: "hátt", 
         html_content: `
-            <div class="question-text">❓ Talar þú stundum hátt?</div>
+            <div class="question-text">❓ Talar þú stundum <u><b>hátt</b></u>?</div>
             <div class="suggestion-title">💡 Tillögur að svörum:</div>
             <ul class="suggestions">
                 <li>Já, ég tala stundum hátt þegar ég þarf þess eða er spennt(ur).</li>
@@ -301,20 +325,18 @@ const exerciseData = [
             </ul>
         `,
         translations: {
-            "en": "<b>Word:</b> hátt (loud / highly)<br><b>Question:</b> Do you sometimes speak loudly?",
-            "pl": "<b>Słowo:</b> hátt (głośno)<br><b>Pytanie:</b> Czy czasami mówisz głośno?",
-            "da": "<b>Ord:</b> hátt (højt)<br><b>Spørgsmål:</b> Taler du nogle gange højt?",
-            "es": "<b>Palabra:</b> hátt (alto / fuerte)<br><b>Pregunta:</b> ¿A veces hablas en voz alta (fuerte)?",
-            "ar": "<div dir='rtl'><b>الكلمة:</b> hátt (بصوت عالٍ)<br><b>السؤال:</b> هل تتحدث بصوت عالٍ أحياناً؟</div>",
-            "uk": "<b>Слово:</b> hátt (голосно)<br><b>Запитання:</b> Ти іноді говориш голосно?",
-            "vi": "<b>Từ:</b> hátt (to / lớn tiếng)<br><b>Câu hỏi:</b> Thỉnh thoảng bạn có nói to không?",
-            "tl": "<b>Salita:</b> hátt (malakas)<br><b>Tanong:</b> Nagsasalita ka ba minsan nang malakas?"
+            "en": "<b>Word:</b> hátt (loud / highly)<br><b>Question:</b> Do you sometimes speak <u><b>loudly</b></u>?<br><br><b>Suggestions:</b><br>• Yes, I sometimes speak loudly when I need to or am excited.<br>• No, I usually speak rather quietly.<br>• I speak loudly when there is a lot of noise around me.",
+            "pl": "<b>Słowo:</b> hátt (głośno)<br><b>Pytanie:</b> Czy czasami mówisz <u><b>głośno</b></u>?<br><br><b>Sugestie:</b><br>• Tak, czasami mówię głośno, kiedy muszę lub jestem podekscytowany/a.<br>• Nie, zazwyczaj mówię raczej cicho.<br>• Mówię głośno, gdy wokół mnie jest duży hałas.",
+            "da": "<b>Ord:</b> hátt (højt)<br><b>Spørgsmål:</b> Taler du nogle gange <u><b>højt</b></u>?<br><br><b>Forslag:</b><br>• Ja, jeg taler nogle gange højt, når jeg skal, eller er spændt.<br>• Nej, jeg taler for det meste ret lavt.<br>• Jeg taler højt, når der er meget støj omkring mig.",
+            "es": "<b>Palabra:</b> hátt (alto / fuerte)<br><b>Pregunta:</b> ¿A veces hablas en voz <u><b>alta</b></u>?<br><br><b>Sugerencias:</b><br>• Sí, a veces hablo en voz alta cuando lo necesito o estoy emocionado/a.<br>• No, por lo general hablo más bien en voz baja.<br>• Hablo fuerte cuando hay mucho ruido a mi alrededor.",
+            "uk": "<b>Слово:</b> hátt (голосно)<br><b>Запитання:</b> Ти іноді говориш <u><b>голосно</b></u>?<br><br><b>Пропозиції:</b><br>• Так, іноді я говорю голосно, коли це потрібно або я схвильований(а).<br>• Ні, зазвичай я говорю досить тихо.<br>• Я говорю голосно, коли навколо мене багато шуму.",
+            "ar": "<div dir='rtl'><b>الكلمة:</b> hátt (بصوت عالٍ)<br><b>السؤال:</b> هل تتحدث <u><b>بصوت عالٍ</b></u> أحياناً؟<br><br><b>اقتراحات:</b><br>• نعم، أتحدث أحياناً بصوت عالٍ عندما أحتاج إلى ذلك أو أكون متحمساً.<br>• لا، عادة ما أتحدث بهدوء إلى حد ما.<br>• أتحدث بصوت عالٍ عندما يكون هناك الكثير من الضوضاء حولي.</div>"
         }
     },
     { 
         text: "vegar", 
         html_content: `
-            <div class="question-text">❓ Það er margt gott í skólanum okkar. Hvað finnst þér hins vegar vanta?</div>
+            <div class="question-text">❓ Það er margt gott í skólanum okkar. Hvað finnst þér hins <u><b>vegar</b></u> vanta?</div>
             <div class="suggestion-title">💡 Tillögur að svörum:</div>
             <ul class="suggestions">
                 <li>Mér finnst hins vegar vanta betri mat í mötuneytið.</li>
@@ -323,20 +345,15 @@ const exerciseData = [
             </ul>
         `,
         translations: {
-            "en": "<b>Word:</b> vegar (way/side - used in 'hins vegar' = however)<br><b>Question:</b> There are many good things in our school. What do you think is missing, however?",
-            "pl": "<b>Słowo:</b> vegar (używane w 'hins vegar' = jednakże)<br><b>Pytanie:</b> W naszej szkole jest wiele dobrych rzeczy. Czego jednak uważasz, że brakuje?",
-            "da": "<b>Ord:</b> vegar (brugt i 'hins vegar' = imidlertid)<br><b>Spørgsmål:</b> Der er mange gode ting på vores skole. Hvad synes du imidlertid der mangler?",
-            "es": "<b>Palabra:</b> vegar (usado en 'hins vegar' = sin embargo)<br><b>Pregunta:</b> Hay muchas cosas buenas en nuestra escuela. Sin embargo, ¿qué crees que falta?",
-            "ar": "<div dir='rtl'><b>الكلمة:</b> vegar (تستخدم في 'hins vegar' بمعنى ومع ذلك)<br><b>السؤال:</b> هناك أشياء كثيرة جيدة في مدرستنا. ومع ذلك، ما الذي تعتقد أنه مفقود؟</div>",
-            "uk": "<b>Слово:</b> vegar (використовується в 'hins vegar' = проте/однак)<br><b>Запитання:</b> У нашій школі багато хорошого. Однак чого, на твою думку, бракує?",
-            "vi": "<b>Từ:</b> vegar (được dùng trong 'hins vegar' = tuy nhiên)<br><b>Câu hỏi:</b> Có nhiều điều tốt ở trường chúng ta. Tuy nhiên, bạn nghĩ còn thiếu điều gì?",
-            "tl": "<b>Salita:</b> vegar (ginagamit sa 'hins vegar' = gayunpaman)<br><b>Tanong:</b> Maraming magagandang bagay sa ating paaralan. Gayunpaman, ano sa tingin mo ang kulang?"
+            "en": "<b>Word:</b> vegar (used in 'hins vegar' = however)<br><b>Question:</b> There are many good things in our school. What do you think is missing, <u><b>however</b></u>?<br><br><b>Suggestions:</b><br>• However, I think we are missing better food in the cafeteria.<br>• However, I think we are missing more comfortable chairs in the classrooms.<br>• I think we are missing more fun events at school.",
+            "pl": "<b>Słowo:</b> vegar (używane w 'hins vegar' = jednakże)<br><b>Pytanie:</b> W naszej szkole jest wiele dobrych rzeczy. Czego <u><b>jednak</b></u> uważasz, że brakuje?<br><br><b>Sugestie:</b><br>• Uważam jednak, że brakuje lepszego jedzenia na stołówce.<br>• Uważam jednak, że brakuje wygodniejszych krzeseł w salach.<br>• Myślę, że brakuje nam więcej fajnych wydarzeń w szkole.",
+            "es": "<b>Palabra:</b> vegar (usado en 'hins vegar' = sin embargo)<br><b>Pregunta:</b> Hay muchas cosas buenas en nuestra escuela. <u><b>Sin embargo</b></u>, ¿qué crees que falta?<br><br><b>Sugerencias:</b><br>• Sin embargo, creo que falta mejor comida en la cafetería.<br>• Sin embargo, creo que faltan sillas más cómodas en las aulas.<br>• Creo que nos faltan más eventos divertidos en la escuela."
         }
     },
     { 
         text: "finnst", 
         html_content: `
-            <div class="question-text">❓ Hvað finnst þér skemmtilegast að gera eftir skóla?</div>
+            <div class="question-text">❓ Hvað <u><b>finnst</b></u> þér skemmtilegast að gera eftir skóla?</div>
             <div class="suggestion-title">💡 Tillögur að svörum:</div>
             <ul class="suggestions">
                 <li>Mér finnst skemmtilegast að fara á æfingu og hitta vini.</li>
@@ -345,20 +362,15 @@ const exerciseData = [
             </ul>
         `,
         translations: {
-            "en": "<b>Word:</b> finnst (find / think / feel)<br><b>Question:</b> What do you find most fun to do after school?",
-            "pl": "<b>Słowo:</b> finnst (uważam/sądzę)<br><b>Pytanie:</b> Co sprawia ci największą przyjemność po szkole?",
-            "da": "<b>Ord:</b> finnst (synes)<br><b>Spørgsmål:</b> Hvad synes du er sjovest at lave efter skole?",
-            "es": "<b>Palabra:</b> finnst (parece / piensa)<br><b>Pregunta:</b> ¿Qué te parece más divertido hacer después de la escuela?",
-            "ar": "<div dir='rtl'><b>الكلمة:</b> finnst (يجد / يعتقد)<br><b>السؤال:</b> ما هو أكثر شيء تجد متعة في القيام به بعد المدرسة؟</div>",
-            "uk": "<b>Слово:</b> finnst (здається / вважаю)<br><b>Запитання:</b> Що тобі найбільше подобається робити після школи?",
-            "vi": "<b>Từ:</b> finnst (cảm thấy / nghĩ)<br><b>Câu hỏi:</b> Bạn thấy điều gì thú vị nhất để làm sau giờ học?",
-            "tl": "<b>Salita:</b> finnst (pakiramdam / sa tingin)<br><b>Tanong:</b> Ano ang pinakamasayang gawin para sa iyo pagkatapos ng klase?"
+            "en": "<b>Word:</b> finnst (find / think / feel)<br><b>Question:</b> What do you <u><b>find</b></u> most fun to do after school?<br><br><b>Suggestions:</b><br>• I find it most fun to go to practice and meet friends.<br>• I really enjoy playing video games at home.<br>• After school, I think it's best to relax and watch TV.",
+            "pl": "<b>Słowo:</b> finnst (uważam/sądzę)<br><b>Pytanie:</b> Co <u><b>uważasz</b></u> za najprzyjemniejsze do robienia po szkole?<br><br><b>Sugestie:</b><br>• Najwięcej przyjemności sprawia mi pójście na trening i spotkanie z przyjaciółmi.<br>• Bardzo lubię grać w gry wideo w domu.<br>• Po szkole najlepiej jest mi się zrelaksować i pooglądać telewizję.",
+            "uk": "<b>Слово:</b> finnst (здається / вважаю)<br><b>Запитання:</b> Що тобі <u><b>найбільше подобається (ти вважаєш найвеселішим)</b></u> робити після школи?<br><br><b>Пропозиції:</b><br>• Мені найцікавіше ходити на тренування і зустрічатися з друзями.<br>• Мені дуже подобається грати у відеоігри вдома.<br>• Після школи найкраще відпочивати і дивитися телевізор."
         }
     },
     { 
         text: "mig", 
         html_content: `
-            <div class="question-text">❓ Getur þú skilið mig vel þegar ég tala íslensku?</div>
+            <div class="question-text">❓ Getur þú skilið <u><b>mig</b></u> vel þegar ég tala íslensku?</div>
             <div class="suggestion-title">💡 Tillögur að svörum:</div>
             <ul class="suggestions">
                 <li>Já, ég get skilið þig mjög vel þegar þú talar skýrt.</li>
@@ -367,20 +379,14 @@ const exerciseData = [
             </ul>
         `,
         translations: {
-            "en": "<b>Word:</b> mig (me)<br><b>Question:</b> Can you understand me well when I speak Icelandic?",
-            "pl": "<b>Słowo:</b> mig (mnie)<br><b>Pytanie:</b> Czy dobrze mnie rozumiesz, kiedy mówię po islandzku?",
-            "da": "<b>Ord:</b> mig (mig)<br><b>Spørgsmål:</b> Kan du forstå mig godt, når jeg taler islandsk?",
-            "es": "<b>Palabra:</b> mig (me / a mí)<br><b>Pregunta:</b> ¿Me puedes entender bien cuando hablo islandés?",
-            "ar": "<div dir='rtl'><b>الكلمة:</b> mig (ني/أنا)<br><b>السؤال:</b> هل تستطيع فهمي جيداً عندما أتحدث الآيسلندية؟</div>",
-            "uk": "<b>Слово:</b> mig (мене)<br><b>Запитання:</b> Ти добре мене розумієш, коли я розмовляю ісландською?",
-            "vi": "<b>Từ:</b> mig (tôi)<br><b>Câu hỏi:</b> Bạn có thể hiểu tôi rõ khi tôi nói tiếng Iceland không?",
-            "tl": "<b>Salita:</b> mig (ako)<br><b>Tanong:</b> Naiintindihan mo ba ako nang mabuti kapag nagsasalita ako ng Icelandic?"
+            "en": "<b>Word:</b> mig (me)<br><b>Question:</b> Can you understand <u><b>me</b></u> well when I speak Icelandic?<br><br><b>Suggestions:</b><br>• Yes, I can understand you very well when you speak clearly.<br>• I understand you sometimes, but sometimes people speak too fast.<br>• No, not completely. I am still learning Icelandic.",
+            "pl": "<b>Słowo:</b> mig (mnie)<br><b>Pytanie:</b> Czy dobrze <u><b>mnie</b></u> rozumiesz, kiedy mówię po islandzku?<br><br><b>Sugestie:</b><br>• Tak, bardzo dobrze cię rozumiem, kiedy mówisz wyraźnie.<br>• Czasami cię rozumiem, ale czasami ludzie mówią zbyt szybko.<br>• Nie, nie całkowicie. Wciąż uczę się islandzkiego."
         }
     },
     { 
         text: "ekkert", 
         html_content: `
-            <div class="question-text">❓ Hvaða orð er andheiti orðsins ekkert?</div>
+            <div class="question-text">❓ Hvaða orð er andheiti orðsins <u><b>ekkert</b></u>?</div>
             <div class="suggestion-title">💡 Tillögur að svörum:</div>
             <ul class="suggestions">
                 <li>Ég held að andheiti orðsins ekkert sé „allt“.</li>
@@ -389,20 +395,14 @@ const exerciseData = [
             </ul>
         `,
         translations: {
-            "en": "<b>Word:</b> ekkert (nothing)<br><b>Question:</b> What word is the antonym of the word 'nothing'?",
-            "pl": "<b>Słowo:</b> ekkert (nic)<br><b>Pytanie:</b> Jakie słowo jest przeciwieństwem słowa 'nic'?",
-            "da": "<b>Ord:</b> ekkert (ingenting)<br><b>Spørgsmål:</b> Hvilket ord er antonymet (modsætningen) til ordet 'ingenting'?",
-            "es": "<b>Palabra:</b> ekkert (nada)<br><b>Pregunta:</b> ¿Qué palabra es el antónimo de la palabra 'nada'?",
-            "ar": "<div dir='rtl'><b>الكلمة:</b> ekkert (لا شيء)<br><b>السؤال:</b> ما هي الكلمة المضادة لكلمة 'لا شيء'؟</div>",
-            "uk": "<b>Слово:</b> ekkert (нічого)<br><b>Запитання:</b> Яке слово є антонімом до слова 'нічого'?",
-            "vi": "<b>Từ:</b> ekkert (không có gì)<br><b>Câu hỏi:</b> Từ nào là từ trái nghĩa của từ 'không có gì'?",
-            "tl": "<b>Salita:</b> ekkert (wala)<br><b>Tanong:</b> Anong salita ang kasalungat ng salitang 'wala'?"
+            "en": "<b>Word:</b> ekkert (nothing)<br><b>Question:</b> What word is the antonym of the word '<u><b>nothing</b></u>'?<br><br><b>Suggestions:</b><br>• I think the antonym of the word nothing is 'everything'.<br>• The antonym to nothing is the word 'something'.<br>• The word 'everything' or 'something' is the antonym to nothing.",
+            "pl": "<b>Słowo:</b> ekkert (nic)<br><b>Pytanie:</b> Jakie słowo jest przeciwieństwem słowa '<u><b>nic</b></u>'?<br><br><b>Sugestie:</b><br>• Myślę, że przeciwieństwem słowa nic jest „wszystko”.<br>• Przeciwieństwem do niczego jest słowo „coś”.<br>• Słowo „wszystko” lub „coś” jest przeciwieństwem do niczego."
         }
     },
     { 
         text: "hefði", 
         html_content: `
-            <div class="question-text">❓ Hvort hefði verið betra að mæta snemma eða seint í skólann í morgun?</div>
+            <div class="question-text">❓ Hvort <u><b>hefði</b></u> verið betra að mæta snemma eða seint í skólann í morgun?</div>
             <div class="suggestion-title">💡 Tillögur að svörum:</div>
             <ul class="suggestions">
                 <li>Það hefði verið betra að mæta snemma til að læra meira.</li>
@@ -411,20 +411,14 @@ const exerciseData = [
             </ul>
         `,
         translations: {
-            "en": "<b>Word:</b> hefði (would have / had)<br><b>Question:</b> Would it have been better to arrive early or late to school this morning?",
-            "pl": "<b>Słowo:</b> hefði (byłby / miałby)<br><b>Pytanie:</b> Czy byłoby lepiej przyjść wcześnie czy późno do szkoły dzisiejszego ranka?",
-            "da": "<b>Ord:</b> hefði (ville have / havde)<br><b>Spørgsmål:</b> Ville det have været bedre at møde tidligt eller sent i skole i morges?",
-            "es": "<b>Palabra:</b> hefði (habría / hubiera)<br><b>Pregunta:</b> ¿Habría sido mejor llegar temprano o tarde a la escuela esta mañana?",
-            "ar": "<div dir='rtl'><b>الكلمة:</b> hefði (كان سيكون)<br><b>السؤال:</b> هل كان من الأفضل الوصول مبكراً أم متأخراً إلى المدرسة هذا الصباح؟</div>",
-            "uk": "<b>Слово:</b> hefði (було б / мав би)<br><b>Запитання:</b> Чи було б краще прийти рано чи пізно до школи сьогодні вранці?",
-            "vi": "<b>Từ:</b> hefði (sẽ có / đã có)<br><b>Câu hỏi:</b> Sáng nay đến trường sớm hay muộn thì tốt hơn?",
-            "tl": "<b>Salita:</b> hefði (sana / sana ay)<br><b>Tanong:</b> Mas mabuti kaya sana kung dumating nang maaga o huli sa paaralan ngayong umaga?"
+            "en": "<b>Word:</b> hefði (would have / had)<br><b>Question:</b> <u><b>Would it have</b></u> been better to arrive early or late to school this morning?<br><br><b>Suggestions:</b><br>• It would have been better to arrive early to learn more.<br>• I was tired, so it would have been nice to sleep longer!<br>• It is always better to arrive on time for school.",
+            "pl": "<b>Słowo:</b> hefði (byłby / miałby)<br><b>Pytanie:</b> Czy <u><b>byłoby</b></u> lepiej przyjść wcześnie czy późno do szkoły dzisiejszego ranka?<br><br><b>Sugestie:</b><br>• Byłoby lepiej przyjść wcześnie, żeby więcej się nauczyć.<br>• Byłem zmęczony/a, więc fajnie byłoby pospać dłużej!<br>• Zawsze lepiej jest przychodzić do szkoły punktualnie."
         }
     },
     { 
         text: "sinn", 
         html_content: `
-            <div class="question-text">❓ Hvar á nemandi helst að geyma símann sinn þegar hann er í kennslustund?</div>
+            <div class="question-text">❓ Hvar á nemandi helst að geyma símann <u><b>sinn</b></u> þegar hann er í kennslustund?</div>
             <div class="suggestion-title">💡 Tillögur að svörum:</div>
             <ul class="suggestions">
                 <li>Nemandi á að geyma símann sinn niðri í töskunni.</li>
@@ -433,20 +427,14 @@ const exerciseData = [
             </ul>
         `,
         translations: {
-            "en": "<b>Word:</b> sinn (his/her/their own)<br><b>Question:</b> Where should a student ideally keep their phone during class?",
-            "pl": "<b>Słowo:</b> sinn (swój)<br><b>Pytanie:</b> Gdzie uczeń powinien najlepiej trzymać swój telefon podczas lekcji?",
-            "da": "<b>Ord:</b> sinn (sin/sit)<br><b>Spørgsmål:</b> Hvor bør en elev helst opbevare sin telefon, når han/hun er i time?",
-            "es": "<b>Palabra:</b> sinn (su / su propio)<br><b>Pregunta:</b> ¿Dónde debería idealmente un estudiante guardar su teléfono durante la clase?",
-            "ar": "<div dir='rtl'><b>الكلمة:</b> sinn (الخاص به/بها)<br><b>السؤال:</b> أين يجب على الطالب أن يحتفظ بهاتفه أثناء الحصة؟</div>",
-            "uk": "<b>Слово:</b> sinn (свій)<br><b>Запитання:</b> Де учню найкраще зберігати свій телефон під час уроку?",
-            "vi": "<b>Từ:</b> sinn (của anh ấy/cô ấy/của mình)<br><b>Câu hỏi:</b> Học sinh nên cất điện thoại ở đâu trong giờ học?",
-            "tl": "<b>Salita:</b> sinn (kanyang sarili)<br><b>Tanong:</b> Saan pinakamabuting itago ng estudyante ang kanyang telepono habang may klase?"
+            "en": "<b>Word:</b> sinn (his/her/their own)<br><b>Question:</b> Where should a student ideally keep <u><b>their</b></u> phone during class?<br><br><b>Suggestions:</b><br>• A student should keep their phone down in their bag.<br>• It's best to have the phone in your pocket and on silent.<br>• The phone should be in the phone-hotel or in the bag.",
+            "pl": "<b>Słowo:</b> sinn (swój)<br><b>Pytanie:</b> Gdzie uczeń powinien najlepiej trzymać <u><b>swój</b></u> telefon podczas lekcji?<br><br><b>Sugestie:</b><br>• Uczeń powinien trzymać swój telefon w torbie.<br>• Najlepiej mieć telefon w kieszeni i wyciszony.<br>• Telefon powinien znajdować się w hotelu telefonicznym lub w torbie."
         }
     },
     { 
         text: "mynd", 
         html_content: `
-            <div class="question-text">❓ Tekur þú stundum mynd með símanum þínum í skólanum?</div>
+            <div class="question-text">❓ Tekur þú stundum <u><b>mynd</b></u> með símanum þínum í skólanum?</div>
             <div class="suggestion-title">💡 Tillögur að svörum:</div>
             <ul class="suggestions">
                 <li>Já, ég tek stundum mynd af töflunni til að muna glósurnar.</li>
@@ -455,14 +443,8 @@ const exerciseData = [
             </ul>
         `,
         translations: {
-            "en": "<b>Word:</b> mynd (picture/photo)<br><b>Question:</b> Do you sometimes take a picture with your phone at school?",
-            "pl": "<b>Słowo:</b> mynd (zdjęcie/obraz)<br><b>Pytanie:</b> Czy czasami robisz zdjęcie telefonem w szkole?",
-            "da": "<b>Ord:</b> mynd (billede)<br><b>Spørgsmål:</b> Tager du nogle gange et billede med din telefon i skolen?",
-            "es": "<b>Palabra:</b> mynd (foto/imagen)<br><b>Pregunta:</b> ¿A veces tomas una foto con tu teléfono en la escuela?",
-            "ar": "<div dir='rtl'><b>الكلمة:</b> mynd (صورة)<br><b>السؤال:</b> هل تلتقط أحياناً صورة بهاتفك في المدرسة؟</div>",
-            "uk": "<b>Слово:</b> mynd (картинка/фото)<br><b>Запитання:</b> Ти іноді робиш фото на свій телефон у школі?",
-            "vi": "<b>Từ:</b> mynd (bức ảnh)<br><b>Câu hỏi:</b> Bạn có thỉnh thoảng chụp ảnh bằng điện thoại ở trường không?",
-            "tl": "<b>Salita:</b> mynd (larawan/litrato)<br><b>Tanong:</b> Kumukuha ka ba minsan ng litrato gamit ang iyong telepono sa paaralan?"
+            "en": "<b>Word:</b> mynd (picture/photo)<br><b>Question:</b> Do you sometimes take a <u><b>picture</b></u> with your phone at school?<br><br><b>Suggestions:</b><br>• Yes, I sometimes take a picture of the board to remember the notes.<br>• Yes, I often take pictures of my friends during recess.<br>• No, I very rarely use my phone at school.",
+            "pl": "<b>Słowo:</b> mynd (zdjęcie/obraz)<br><b>Pytanie:</b> Czy czasami robisz <u><b>zdjęcie</b></u> telefonem w szkole?<br><br><b>Sugestie:</b><br>• Tak, czasami robię zdjęcie tablicy, aby zapamiętać notatki.<br>• Tak, często robię zdjęcia moim przyjaciołom podczas przerw.<br>• Nie, rzadko używam telefonu w szkole."
         }
     }
 ];
@@ -534,15 +516,35 @@ function findNextUnfinished() {
         <div class="progress-container"><div id="progress-bar"></div></div>
         
         <div class="lang-selector">
-            <label for="languageSelect"><b>🌍 Þýðing (Orð + Spurning):</b></label>
+            <label for="languageSelect"><b>🌍 Þýðing (Orð, spurning & tillögur):</b></label>
             <select id="languageSelect" onchange="updateUI()">
                 <option value="" selected disabled>Veldu tungumál...</option>
                 <option value="ar">Arabíska – العربية</option>
+                <option value="be">Belgíska (Flæmska) – Vlaams</option>
                 <option value="da">Danska – Dansk</option>
                 <option value="en">Enska – English</option>
                 <option value="tl">Filippseyska – Tagalog</option>
+                <option value="fi">Finnska – Suomi</option>
+                <option value="fr">Franska – Français</option>
+                <option value="fo">Færeyska – Føroyskt</option>
+                <option value="kl">Grænlenska – Kalaallisut</option>
+                <option value="nl">Hollenska – Nederlands</option>
+                <option value="it">Ítalska – Italiano</option>
+                <option value="ja">Japanska – 日本語</option>
+                <option value="zh">Kínverska – 中文</option>
+                <option value="ku">Kúrdíska – Kurdî</option>
+                <option value="lv">Lettneska – Latviešu</option>
+                <option value="lt">Litháíska – Lietuvių</option>
+                <option value="no">Norska – Norsk</option>
+                <option value="fa">Persneska – فارسی</option>
+                <option value="pt">Portúgalska – Português</option>
                 <option value="pl">Pólska – Polski</option>
+                <option value="ro">Rúmenska – Română</option>
+                <option value="ru">Rússneska – Русский</option>
                 <option value="es">Spænska – Español</option>
+                <option value="sv">Sænska – Svenska</option>
+                <option value="th">Tælenska – ภาษาไทย</option>
+                <option value="de">Þýska – Deutsch</option>
                 <option value="uk">Úkraínska – Українська</option>
                 <option value="vi">Víetnamska – Tiếng Việt</option>
             </select>
@@ -583,9 +585,6 @@ function updateUI() {
                 </button>
                 <br><br>
                 <button class="btn" style="background-color: #5f6368;" onclick="location.reload()">🔄 Byrja nýja umferð</button>
-                <div class="feedback-note">
-                    Vinsamlegast sendið ábendingar á dgu@fb.is
-                </div>
             `;
         } else {
             document.getElementById('app').innerHTML = `
@@ -594,9 +593,6 @@ function updateUI() {
                 <p style="font-size: 1.2em;">Þú hefur klárað ${correctCount} af${exerciseData.length} orðum með 100% árangri.</p>
                 <p style="font-size: 1.1em; color: #555;">Farðu til baka og reyndu aftur við þau orð sem vantaði upp á til að fá skjalið.</p>
                 <button class="btn" style="background-color: #fbbc05; color: #000;" onclick="findNextUnfinished()">➡️ Fara á orð sem vantar</button>
-                <div class="feedback-note">
-                    Vinsamlegast sendið ábendingar á dgu@fb.is
-                </div>
             `;
         }
         return;
@@ -612,9 +608,9 @@ function updateUI() {
     document.getElementById('counter').innerText = `Spurning ${currentIndex + 1} af${exerciseData.length}`;
     
     if (!selectedLang) {
-        document.getElementById('media-box').innerHTML = "<i>Veldu tungumál úr listanum að ofan til að sjá þýðingu á spurningunni.</i>";
+        document.getElementById('media-box').innerHTML = "<i>Veldu tungumál úr listanum að ofan til að sjá þýðingu á spurningunni og svörunum.</i>";
     } else {
-        document.getElementById('media-box').innerHTML = curr.translations[selectedLang] || (curr.translations['en'] + "<br><br><i>(Ath: Þýðingu á þessu tungumáli vantar, sýni ensku)</i>");
+        document.getElementById('media-box').innerHTML = curr.translations[selectedLang] || (curr.translations['en'] + "<br><br><i>(Þýðingu vantar á þessu tungumáli, sýni ensku)</i>");
     }
 
     const savedScore = userScores[currentIndex];
